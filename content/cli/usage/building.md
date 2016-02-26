@@ -21,7 +21,7 @@ By default running `wercker build` will not save the container. In order
 to save the container you must commit it first:
 
 ```no-highlight
-wercker build --commit
+wercker build --commit <image_name>
 ```
 
 ### internal/docker-push
