@@ -96,7 +96,7 @@ In your project folder, run `wercker dev --publish 8000`. You should see
 something similar to the following output:
 
 ```no-highlight
-$ wercker dev --pubish 8000
+$ wercker dev --publish 8000
 --> Executing pipeline
 --> Running step: setup environment
 --> Executing pipeline
