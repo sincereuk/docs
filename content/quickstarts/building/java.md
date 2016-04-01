@@ -120,7 +120,7 @@ started with access to your checked out code. It will then start executing all t
 steps that are defined in the **wercker.yml**.
 
 If you navigate to DOCKER_HOST_IP:8080 you should see the same
-output as before, your web application is now running inside a docker container.
+output as before. The difference is that now your web application is running inside a docker container.
 
 This is just the tip of the iceberg, there are [many more steps](https://app.wercker.com/#explore) to use for
 developing your app.  Take a look around, and if you can't find the step you're
@@ -159,9 +159,9 @@ build:
 ```
 
 #### Build Pipeline
-We're now interested in what's happening the _build_ pipeline.  We've
-added a new script step here, this will run our gradle build which will compile our web application.
-take note that were also using the $WERCKER_CACHE_DIR environment variable to take full advantage of caching.
+We're now interested in what's happening the _build_ pipeline. We've
+added a new script step here, which will run our gradle build to compile our web application.
+Take note that were also using the $WERCKER_CACHE_DIR environment variable to take full advantage of caching.
 
 #### wercker build
 Now that we have a better understanding of our **wercker.yml** let's go ahead
