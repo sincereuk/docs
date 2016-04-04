@@ -4,13 +4,13 @@ tags: pipelines
 
 ## Pipelines
 
-The pipeline is the heart and soul of wercker, it's where you define the
+The pipeline is the heart and soul of Wercker, it's where you define the
 actions (steps) and environment for your tasks, often your tests, builds and
 deploys. They are an aggregate of steps and will
 pass or fail based on the steps within.
 
 Each pipeline also comes with an environment, some set by default by the
-wercker tool and, when run by wercker.com, others defined by the settings
+Wercker tool and, when run by wercker.com, others defined by the settings
 you've entered on wercker.com.
 
 [Steps](/docs/steps/index.html) are the actions performed within pipelines.
