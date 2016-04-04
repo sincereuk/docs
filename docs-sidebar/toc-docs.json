@@ -2,6 +2,12 @@
   [
      "about"
   ],
+	[
+		"workflows",
+		"managing.md",
+		"chaining.md",
+		"examples.md"
+	],
   [
      "pipelines",
      "per-pipeline-containers.md",
