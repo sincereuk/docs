@@ -34,10 +34,13 @@ application **settings** page and head to the **Workflows** section.
 To create a workflow you must:
 
 1. Give it a name e.g.: “**deploy-to-dockerhub**”;
-2. Decide how this workflow gets executed; this is either by listening on a Git
-source or by listening for another workflow;
+2. Decide how this workflow gets executed; This can be a Git or another Workflow hook;
 3. Specify which pipeline you would like to execute; the pipeline-name
 corresponds to the pipeline-name as you defined it in your wercker.yml;
+
+Note that, when creating an application on the Wercker platform, a `build`
+Worfklow, which contains a Git hook and executes a pipeline called `build` will
+be automatically created.
 
 ### Updating Workflows
 

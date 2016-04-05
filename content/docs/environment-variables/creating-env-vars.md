@@ -9,7 +9,7 @@ both a `text` and `SSH Key pair` environment variable.
 ### <a name="text-env-var" class="anchor"></a>Creating a text environment variable
 
 Creating a new environment variable is as simple as filling in a name, value and
-hit Add. The next build or deploy you will trigger now has the environment variable
+hiting Save. The next pipeline run you will trigger now has the environment variable
 available in its pipeline.
 
 
