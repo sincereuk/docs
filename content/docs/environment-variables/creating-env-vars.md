@@ -51,12 +51,12 @@ variables ending with: `_PRIVATE` and `_PUBLIC`.
 
 To use the SSH key pairs in wercker, you have to do two things.
 
-* let wercker generate a pair, [read more on creating a SSH key pair &rsaquo;](/docs/ssh-keys/generating-ssh-keys.html)
+* let Wercker generate a pair, [read more on creating a SSH key pair &rsaquo;](/docs/ssh-keys/generating-ssh-keys.html)
 * create a variable
 
 #### Create a variable
 
-Instead `text`, choose the `SSH Key pair` option, and select the `SSH Key pair`
+Instead of `text`, choose the `SSH Key pair` option, and select the `SSH Key pair`
 you just created.
 
 When you create a new variable for the `SSH key pair`, you will notice that you
