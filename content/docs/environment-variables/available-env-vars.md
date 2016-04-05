@@ -1,14 +1,13 @@
----
-tags: environmentvariables
+--- tags: environmentvariables
 ---
 ## Available environment variables
 
-There are a number of environment variables defined during a build (as well as
-during a deploy). They contain a variety of information, such as links to the
-current application, build or deploy as well as the branch name and the location
-of your application's unique cache.
+There are a number of environment variables defined during pipeline execution.
+They contain a variety of information, such as links to the current
+application, the run, as well as the branch name and the location of your
+application's unique cache.
 
-### Build related variables
+### Git-type Workflow related variables
 
 Let's take a look at a selection of them available during a build:
 
@@ -31,7 +30,7 @@ Let's take a look at a selection of them available during a build:
     <td>Can be used to detect if the app/script is running in an automated environment</td>
 </tr>
 <tr>
-    <td>WERCKER_BUILD_URL</td>
+    <td>WERCKER_RUN_URL</td>
     <td>https://app.....178b</td>
     <td>Link to the build on wercker</td>
 </tr>
@@ -84,8 +83,8 @@ Let's take a look at a selection of them available during a build:
 </tr>
 <tr>
     <td>WERCKER_STARTED_BY</td>
-    <td>Jacco Flenter</td>
-    <td>build was started by this user</td>
+    <td>John Doe</td>
+    <td>Run was started by this user</td>
 </tr>
 <tr>
     <td>WERCKER_APPLICATION_URL</td>
@@ -95,14 +94,15 @@ Let's take a look at a selection of them available during a build:
 </tbody>
 </table>
 
-When a step is executed, wercker also creates additional environment variables
+When a step is executed, Wercker also creates additional environment variables
 for you to use. Please see [the steps section](/learn/steps/introduction.html).
 for more information.
 
-### Deploy related variables
+### Workflow-type related variables
 
-The following variables are available during deploys. As you can see it's more
-or less an expanded version of the information available during a build.
+The following variables are available during Workflows with a Workflow-type
+hook. As you can see it's more or less an expanded version of the information
+available during a Git-type hook.
 
 <table border="0">
 <thead>
@@ -128,7 +128,7 @@ or less an expanded version of the information available during a build.
     <td>Name of the deploy target the deploy is targeting</td>
 </tr>
 <tr>
-    <td>WERCKER_DEPLOY_URL</td>
+    <td>WERCKER_RUN_URL</td>
     <td>https://app.....178b</td>
     <td>Link to the DEPLOY on wercker</td>
 </tr>
@@ -171,8 +171,8 @@ or less an expanded version of the information available during a build.
 </tr>
 <tr>
     <td>WERCKER_STARTED_BY</td>
-    <td>Jacco Flenter</td>
-    <td>build was started by this user</td>
+    <td>John Doe</td>
+    <td>Run was started by this user</td>
 </tr>
 <tr>
     <td>WERCKER_APPLICATION_URL</td>

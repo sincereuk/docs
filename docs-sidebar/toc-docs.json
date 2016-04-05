@@ -46,15 +46,6 @@
      "creating-steps.md"
   ],
   [
-     "deploy",
-     "multi-deploy-targets.md",
-     "auto-deploy.md",
-     "steps.md",
-     "heroku.md",
-     "amazon-ecs.md",
-     "s3.md"
-  ],
-  [
      "languages",
      "golang.md",
      "nodejs.md",
