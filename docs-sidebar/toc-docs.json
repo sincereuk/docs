@@ -45,13 +45,6 @@
      "creating-steps.md"
   ],
   [
-     "languages",
-     "golang.md",
-     "nodejs.md",
-     "python.md",
-     "ruby.md"
-  ],
-  [
      "environment-variables",
      "after-step-variables.md",
      "available-env-vars.md",
