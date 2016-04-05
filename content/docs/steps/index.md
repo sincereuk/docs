@@ -4,19 +4,15 @@ tags: steps
 
 ## Steps
 
-Steps make up the wercker
-[pipeline](/learn/pipelines/introduction.html) and can either be
-executed in the [build](/learn/pipelines/available-pipelines.html) or
-[deploy](/learn/pipelines/available-pipelines.html) phase within the pipeline.
+Steps make up the wercker [pipeline](/learn/pipelines/introduction.html).
+Examples of a **build step** are compilation of your code, running your unit
+tests or performing [jshint](https://github.com/wercker/step-jshint/).
 
-Examples of a **build step** are compilation of your code, running your
-unit tests or performing
-[jshint](https://github.com/wercker/step-jshint/).
-
-A **deploy step** could be the synchronization of static assets, for
-which we've created the [s3sync step](https://github.com/wercker/step-s3sync/),
-that takes some Amazon Web Services credentials and bucket information and
-places these assets on Amazon S3.
+When deploying an application, a step could be the synchronization of static
+assets, for which we've created the [s3sync
+step](https://github.com/wercker/step-s3sync/), that takes some Amazon Web
+Services credentials and bucket information and places these assets on Amazon
+S3.
 
 You define your steps in the [wercker.yml](/docs/wercker-yml/creating-a-yml.html) file
 in your application. Steps can have parameters. Some parameters are
@@ -59,13 +55,19 @@ information`.
 
 #### after-steps
 
-Wercker also has the notion of [after-steps](/docs/steps/after-steps.html) ideally suited for notifications.
+Wercker also has the notion of [after-steps](/docs/steps/after-steps.html)
+ideally suited for notifications.
 
 #### Changing the working directory
 
-Some tools need to be in a certain directory to work, `bundle-install` for example will look for a Gemfile in the current directory and install the gems from that Gemfile. With wercker it is possible to change the working directory for all steps, it is not necessary for the steps developers to add extra code.
+Some tools need to be in a certain directory to work, `bundle-install` for
+example will look for a Gemfile in the current directory and install the gems
+from that Gemfile. With wercker it is possible to change the working directory
+for all steps, it is not necessary for the step developers to add extra code.
 
-To change the working directory of a step you need to add a **cwd** element to the step. You can specify a relative path (relative from `$WERCKER_ROOT`) or a absolute path. Use of environment variables is possible.
+To change the working directory of a step you need to add a **cwd** element to
+the step. You can specify a relative path (relative from `$WERCKER_ROOT`) or a
+absolute path. Use of environment variables is possible.
 
 ```yaml
 build:

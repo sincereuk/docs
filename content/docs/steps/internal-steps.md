@@ -122,8 +122,7 @@ To run this, you would do:
 wercker dev --publish 5000
 ```
 
-And once it loads, browse to your docker host (either localhost on linux, or
-with boot2docker usually  on 192.168.59.103) on port 5000 to see your app running.
+And once it loads, browse to your docker host on port 5000 to see your app running.
 For your convenience, we'll tell you the IP once the step runs.
 
 As you make changes to your code, the app will be reloaded, but the npm-install
