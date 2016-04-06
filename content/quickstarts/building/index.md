@@ -43,6 +43,13 @@ Get started using your favorite language:
         </span>
         <h5>PHP</h5>
       </a>
+      <a href="/quickstarts/building/java.html" class="quickstart-links-item" id="quickstart-link-java">
+        <span class="quickstart-logo">
+          <img src="/images/quickstarts-java.png" width="85" height="85" alt="Java quickstart">
+          <img src="/images/quickstarts-java.png" width="85" height="85" alt="Java quickstart">
+        </span>
+        <h5>Java</h5>
+      </a>
     </div>
   </div>
 </section>

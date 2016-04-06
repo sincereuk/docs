@@ -71,7 +71,22 @@
   }
 
   .quickstart-links-item {
-    flex: 1 1 20%;
+    flex: 1 1 30%;
+    margin-bottom: 20px;
+  }
+}
+
+/**
+ * Responsive rules for screens starting at 1024px width
+ */
+
+@media screen and (min-width: 1024px) {
+  .quickstart-links {
+    padding: 0;
+  }
+
+  .quickstart-links-item {
+    flex: 1 1 10%;
     margin-bottom: 0;
   }
 }
