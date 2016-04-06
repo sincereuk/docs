@@ -1,12 +1,11 @@
 ## Introduction to steps
 
-Steps make up the wercker pipeline and can either be executed in the build or
-deploy phase within the pipeline.
+Steps make up the wercker pipeline and are executed within the pipeline.
 
-Examples of a **build step** are compilation of your code, running your
+Examples steps that you could run in your build phase  are compilation of your code, running your
 unit tests or even static code analysis such as `jshint` or `golint`.
 
-A **deploy step** could be the synchronization of static assets, for
+Steps run in your deploy phase could be the synchronization of static assets, for
 which we've created the [s3sync
 step](https://github.com/wercker/step-s3sync/), that takes some Amazon
 Web Services

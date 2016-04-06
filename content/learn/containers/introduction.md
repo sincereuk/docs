@@ -7,20 +7,23 @@ Not only are containers an isolated unit of work, they're also portable.
 
 ### Docker
 
-Wercker uses [Docker](http://docker.com) containers to
-not only run your pipelines, but also stores your build artifacts as
-containers.
+Wercker's usage of [Docker](http://docker.com) is twofold. First of all,
+Wercker executes your [pipelines](/learn/pipelines/introduction.html) inside
+containers, providing you with an isolated runtime environment to run your
+tests in. 
 
-This means that you can ship and deploy these containers to your servers.
+Secondly, every Wercker pipeline produces an artifact, and that result can be
+packaged as a container and pushed to a registry seamlessly.
+
+This means that you can build, ship and deploy these containers to your servers
+all from within Wercker.
 
 ![image](/images/portable-container.svg)
 
-Within pipelines, containers are used to run your language stack (for
-instance python) but also services such as a database.
+Within pipelines, containers are used to run your language stack (for instance
+python) but also services such as a database.
 
-> Every wercker pipeline runs inside a container
-
-In the next couple of sections we will explain where to get your
-containers from, and how to use them.
+In the next couple of sections we will explain where to get your containers
+from, and how to use them.
 
 [Using Containers &rsaquo;](/learn/containers/using-containers.html "nav next containers")
