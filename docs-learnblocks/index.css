@@ -92,6 +92,25 @@
     display: block;
     opacity: 0;
   }
+
+  .learnblocks-item-icon svg {
+    display: none;
+  }
+}
+
+/**
+ * Responsive rules for screens starting at 1024px width
+ */
+
+@media screen and (min-width: 1024px) {
+  .learnblocks-item.active .learnblocks-item_active {
+    display: block;
+    opacity: 0;
+  }
+
+  .learnblocks-item-icon svg {
+    display: inherit;
+  }
 }
 
 
