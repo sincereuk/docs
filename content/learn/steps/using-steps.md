@@ -1,6 +1,6 @@
 ## Using steps
 
-You define your steps in the wercker.yml file for your application.
+You define your steps in the **wercker.yml** file for your application.
 
 ```yaml
 box: wercker/python
