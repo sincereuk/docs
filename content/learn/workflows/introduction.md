@@ -6,6 +6,8 @@ create **any type of pipeline** and more importantly, **chain pipelines together
 This allows you to build modern, complex, containerized applications in a
 highly automatable fashion.
 
+![image](/images/workflows-content.svg)
+
 Moving away from traditional builds & deploys is neccessary because modern
 cloud-native applications consist of multiple moving pieces - **microservices** -
 that often need to built & tested together. Splitting up your build and deploy
@@ -13,7 +15,7 @@ pipelines give you the possibility to combat that complexity.
 
 ### Using Workflows
 
-While [pipelines](/learn/pipelines/introduction.md) allow you to define how
+While [pipelines](/learn/pipelines/introduction.html) allow you to define how
 your applications get **built & deployed**, with **Workflows** you define
 how those pipelines **should be managed**.  For example, having multiple
 pipelines react to each other, or even running in parallel, is something you
@@ -43,10 +45,9 @@ hook).
 ### Using Workflows: executing pipelines
 
 After defining them in the **wercker.yml**, pipelines can be executed by
-passing the pipeline-name to the Workflow by passing the pipeline-name to a
-Workflow. Of course, it's possible to have multiple Workflows executing the same
-pipeline, giving you the possibility to execute a pipeline based on different
-conditions
+passing the pipeline-name to the Workflow. Of course, it's possible to have
+multiple Workflows executing the same pipeline, giving you the possibility to
+execute a pipeline based on different conditions.
 
 ![image](/images/workflows-example.svg)
 

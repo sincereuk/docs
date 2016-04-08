@@ -6,4 +6,3 @@ pipelines as you want, instead of just **build** -> **deploy**.
 Chaining Workflows can be done up to 10 times to create the powerful, custom
 Workflow that you need.
 
-For example Workflows, please check out [this page](/docs/workflows/examples.html).

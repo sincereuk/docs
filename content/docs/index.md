@@ -10,6 +10,7 @@ The most important sections are [workflows](/docs/workflows/index.html),
 [wercker.yml](/docs/wercker-yml/index.html), each topic a building block of the
 Wercker product.
 
+![image](/images/docs-intro.svg)
 
 If you want to get started right away, check out one of these quickstart guides
 to start building in minutes:

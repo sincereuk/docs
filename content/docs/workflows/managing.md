@@ -7,10 +7,10 @@ two types of hooks: **Git** and **Workflow**.
 
 #### Git Hooks
 
-Git hooks work just as your standard **build**. When a change is detected for a
-Git source, the Workflow will trigger the pipeline that is attached to it. Git
-hooks allow you to specify which branches should be **ignored** in the
-**Hooks** section of your Workflow.
+Git hooks work just as your average **build** pipeline. When a change is
+detected for a Git source, the Workflow will trigger the pipeline that is
+attached to it. Git hooks allow you to specify which branches should be
+**ignored** in the **Hooks** section of your Workflow.
 
 You can have have multiple Workflows listening on the same Git source by simply
 creating a new Workflow with a Git hook.
@@ -24,7 +24,7 @@ This allows you to [chain pipelines](/docs/workflows/chaining.html) together.
 ### Creating Workflows
 
 Workflows can only be created in the UI (different from
-[pipelines](/docs/pipelines/index.html), which can only defined in the
+[pipelines](/docs/pipelines/index.html), which can only be defined in the
 [wercker.yml](/docs/wercker-yml/index.html)). 
 
 To create a new Workflow, you can use the green "Workflow" button found in the
@@ -39,13 +39,13 @@ To create a workflow you must:
 corresponds to the pipeline-name as you defined it in your wercker.yml;
 
 Note that, when creating an application on the Wercker platform, a `build`
-Worfklow, which contains a Git hook and executes a pipeline called `build` will
-be automatically created.
+Worfklow, which contains a Git hook and executes a pipeline called `build`,
+will be automatically created.
 
 ### Updating Workflows
 
-You can see an overview of all your Workflows in your **application settings** -> **Workflows**. 
-Selecting one Workflow allows you to edit its settings. 
+An overview of all your Workflows is available in your **application settings**
+-> **Workflows**. Selecting one Workflow allows you to edit its settings. 
 
 #### Updating environment variables
 
