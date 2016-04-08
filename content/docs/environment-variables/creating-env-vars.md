@@ -3,17 +3,15 @@
 The interface supports two types of data, this article will show how to create
 both a `text` and `SSH Key pair` environment variable.
 
-To create an environment variable go to the `Pipeline` settings section of your
-application and click `Add new variable`.
-
 * [Creating a text environment variable](#text-env-var)
 * [Creating a SSH key pair environment variable](#ssh-env-var)
 
 ### <a name="text-env-var" class="anchor"></a>Creating a text environment variable
 
 Creating a new environment variable is as simple as filling in a name, value and
-hit Save. The next build or deploy you will trigger now has the environment variable
+hit Add. The next build or deploy you will trigger now has the environment variable
 available in its pipeline.
+
 
 > Please not that the name has to start with a letter and after that the following
 characters are supported: 'a-z', '0-9' and '_'
@@ -44,28 +42,26 @@ build:
 
 ### <a name="ssh-env-var" class="anchor"></a>Creating a SSH key pair environment variable
 
+![image](/images/creating-env-vars_2.jpg)
+
 Another common type of information used during deploys (but also during builds)
 are `SSH key pairs`. Wercker can help you generate them for you and will only expose
 the public part of the pair via the interface. During a pipeline run, the key pair
 is exposed via two environment variables ending with: `_PRIVATE` and `_PUBLIC`.
 
-To use the SSH key pairs in wercker, you have to do two things.
+#### Creating a SSH key pair variable
 
-* let wercker generate a pair, [read more on creating a SSH key pair &rsaquo;](/docs/ssh-keys/generating-ssh-keys.html)
-* create a variable
+When creating a SSH key pair variable you can choose to let Wercker generate a pair
+or use an existing one that got created earlier.
 
-#### Create a variable
-
-Instead `text`, choose the `SSH Key pair` option, and select the `SSH Key pair`
-you just created.
+Wercker will save the generated key pairs in the [SSH key section &rsaquo;](/docs/ssh-keys/index.html)
 
 When you create a new variable for the `SSH key pair`, you will notice that you
 are actually creating two environment variables who are based on the name you are entering.
 
 For instance if you created an `SSH key pair` to use as a bitbucket deploy key,
-you may want to name the variable `BITBUCKET_DEPLOY_KEY`. During the pipeline
-run you will now have two environment variables: `$BITBUCKET_DEPLOY_KEY_PRIVATE`
-and `$BITBUCKET_DEPLOY_KEY_PUBLIC`.
+you may want to name the variable `DEPLOY_KEY`. During the pipeline
+run you will now have two environment variables: `$DEPLOY_KEY_PRIVATE`
+and `$DEPLOY_KEY_PUBLIC`.
 
-![image](/images/creating-env-vars_2.jpg)
 
