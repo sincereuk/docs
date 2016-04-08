@@ -28,8 +28,7 @@ Wercker lets you do just that. By setting up automated development pipelines,
 very much in the spirit of “release early, release often”, you can build and
 deploy your services with just a git push. You can then let Wercker compile and
 run any other steps that are necessary to build your project before it gets
-deployed to a [target](/deploy/steps.html) of
-your choosing.
+deployed to a target of your choosing.
 
 Under the hood wercker leverages Docker containers to not only allow automated
 pipelines, but also isolated environments to run code in. Wercker runs your
