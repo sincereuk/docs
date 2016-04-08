@@ -5,8 +5,7 @@
 	[
 		"workflows",
 		"managing.md",
-		"chaining.md",
-		"examples.md"
+		"chaining.md"
 	],
   [
      "pipelines",
