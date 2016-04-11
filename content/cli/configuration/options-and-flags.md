@@ -155,12 +155,5 @@ When storing artefacts on S3, specify which bucket it needs to be saved to.
 
 When storing artefacts on S3, specify which region wercker should use.
 
-#### <a name="enable-gitignore" class="anchor"></a>Enable gitignore
-
-
-`--enable-gitignore`
-
-When building a container, don't include files that are inside your `.gitignore` to your container. Enabled by default by `wercker dev` and `wercker build`. Disabled by default on `wercker deploy`. To disable set to false as so `--enable-gitignore=false`.
-
 ***
 ***
