@@ -36,26 +36,21 @@ locally using [wercker dev](/cli/usage/developing.html) or
 
 ```no-highlight
 OPTIONS:
-   --working-dir 					Path where we store working files.
-   --build-dir "./_builds"				Path where created builds live.
-   --cache-dir "./_cache"				Path for storing pipeline cache.
-   --container-dir "./_containers"			Path where exported containers live.
-   --project-dir "./_projects"				Path where downloaded projects live.
-   --step-dir "./_steps"				Path where downloaded steps live.
+   --working-dir "./.wercker"				Path where we store working files. [$WERCKER_WORKING_DIR]
    --deploy-target 					The deploy target name. [$WERCKER_DEPLOYTARGET_NAME]
    --docker-host 					Docker api endpoint. [$DOCKER_HOST]
    --docker-tls-verify "0"				Docker api tls verify. [$DOCKER_TLS_VERIFY]
    --docker-cert-path 					Docker api cert path. [$DOCKER_CERT_PATH]
    --docker-local					Don't interact with remote repositories
+   --checkpoint 					Skip to the next step after a recent build checkpoint.
    --direct-mount					Mount our binds read-write to the pipeline path.
    --publish [--publish option --publish option]	Publish a port from the main container, same format as docker --publish.
-   --enable-gitignore					Parse gitignore file to ignore files in your build
+   --enable-volumes					Mount local files and directories as volumes to your wercker container, specified in your wercker.yml.
    --commit 						Commit the build result locally.
    --tag 						Tag for this build. [$WERCKER_GIT_BRANCH]
    --message 						Message for this build.
    --artifacts						Store artifacts.
    --no-remove						Don't remove the containers.
-   --store-local					Store artifacts and containers locally.
    --store-s3						Store artifacts and containers on s3.
    --aws-secret-key 					Secret access key. Used for artifact storage.
    --aws-access-key 					Access key id. Used for artifact storage.
@@ -64,8 +59,7 @@ OPTIONS:
    --source-dir 					Source path relative to checkout root.
    --no-response-timeout "5"				Timeout if no script output is received in this many minutes.
    --command-timeout "25"				Timeout if command does not complete in this many minutes.
-   --wercker-yml 					Specify a specific yaml file.
-
+   --wercker-yml 					Specify a specific yaml file. [$WERCKER_YML_FILE]
 ```
 
 ***
