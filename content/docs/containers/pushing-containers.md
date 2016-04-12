@@ -138,3 +138,20 @@ deploy:
 
 Thanks to wercker user [vially](https://github.com/vially) for providing these steps!
 
+### <a name="ecr" class="anchor"></a> Pushing to Amazon ECR
+
+Pushing to ECR requires some extra paramaters for it to work. 
+
+```yaml
+box: busybox
+push-to-ecr:
+  steps:
+    - internal/docker-push:
+        aws-access-key: $AWS_ACCESS_KEY_ID
+        aws-secret-key: $AWS_SECRET_ACCESS_KEY
+        aws-region: $AWS_REGION
+        aws-registry-id: $AWS_REGISTRY_ID
+        repository: your_repo_name
+```
+
+> Note, if no tag is specified, the tag will be set to the branch name.
