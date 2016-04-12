@@ -55,28 +55,7 @@ for more information on this.
 
 ![image](/images/adding-a-new-application_5.jpg)
 
-### Step 5: Setup your wercker.yml
-
-Now, wercker is ready to help you with the `wercker.yml` file. It could of course
-be the case that you’ve already added a `wercker.yml` to your repository.
-This step automatically detects the presence of a `wercker.yml` in your repository.
-
-If the `wercker.yml` is not present we will try to detect the programming language
-of your project and present a suggested wercker.yml file with sensible defaults
-that you need to commit and push to your repository.
-
-[Read more on the wercker.yml &rsaquo;](/docs/wercker-yml/index.html)
-
-![image](/images/adding-a-new-application_6.jpg)
-
-By default our `Docker stack` is enabled. There are differences in supported
-features per stack. When you switch of the `Docker stack` you will notice the
-content of the wercker.yml changes to make sure you are using the correct
-environment to run your builds in.
-
-[Read more on the Docker and classic stack &rsaquo;](/docs/pipelines/stacks.html)
-
-### Step 6: Finishing up
+### Step 5: Finishing up
 
 You are almost there! Set your application to `public` if you want to share it
 with the world. Public applications will only show your builds.
