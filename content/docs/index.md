@@ -1,13 +1,19 @@
 ## Docs
 
-Welcome to the wercker documentation! The *docs* section covers all the wercker
+Welcome to the wercker documentation! The *docs* section covers all the Wercker
 concepts and common tasks. If you are completely new to wercker, it's
 recommended to first go through the [learn
 section](http://devcenter.wercker.com/learn/basics/introduction.html).
 
+The most important sections are [workflows](/docs/workflows/index.html),
+[pipelines](/docs/pipelines/index.html) and
+[wercker.yml](/docs/wercker-yml/index.html), each topic a building block of the
+Wercker product.
+
+![image](/images/docs-intro.svg)
+
 If you want to get started right away, check out one of these quickstart guides
 to start building in minutes:
-
 
 <section class="flex-outer quickstart-links">
   <div class="flex-inner">

@@ -48,8 +48,8 @@ services:
 ```
 
 - - -
-> Want to pull private containers? Read more on our
-> [docs](/docs/containers/private-containers.html)
+> Want to pull private containers? Read more in our
+> [documentation section](/docs/containers/private-containers.html)
 
 
 Now that we know how to use containers and define them in our

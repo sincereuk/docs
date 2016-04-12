@@ -12,13 +12,14 @@ Private services can either be pulled in from a private repository
 on the [Docker Hub](/docs/containers/index.html) or from a
 private registry such as [quay.io](http://quay.io).
 
-By default wercker fetches private container from the Docker Hub.
-Below a service definition for your [wercker.yml](/docs/wercker-yml/creating-a-yml.html)
-file that retrieves a private container from the user `dijkstra` containing a the repository
-[rethinkdb](http://rethinkdb.org). The credentials for Docker Hub are
-passed along as environment variables
-(`$USERNAME` and `$PASSWORD`) that are either exported or defined in
-the [wercker web interface](/docs/environment-variables/index.html).
+By default wercker fetches private container from the Docker Hub.  Below a
+service definition for your
+[wercker.yml](/docs/wercker-yml/creating-a-yml.html) file that retrieves a
+private container from the user `dijkstra` containing the repository
+[rethinkdb](http://rethinkdb.org). The credentials for Docker Hub are passed
+along as environment variables (`$USERNAME` and `$PASSWORD`) that are either
+exported or defined in the [wercker web
+interface](/docs/environment-variables/index.html).
 
 
 ```yaml

@@ -1,8 +1,6 @@
 ## Configuration
 
-Configuring wercker is straightforward. 
-
-Every project needs a **wercker.yml** file present in its directory. It's
+Configuring wercker is straightforward. Every project needs a **wercker.yml** file present in its directory. It's
 where you will define everything needed to **develop**, **build** or **deploy**
 your project.
 
@@ -61,5 +59,5 @@ Wercker also injects some environment variables by default that you can use
 throughout your pipeline. You can read more about which variables get injected
 in the [documentation](/docs/environment-variables/index.html).
 
-[&lsaquo; Workflow](/learn/basics/workflow.html "nav previous basics")
-[Pipelines &rsaquo;](/learn/pipelines/introduction.html "nav next pipelines")
+[&lsaquo; Developer flow](/learn/basics/developer-flow.html "nav previous basics")
+[Workflows &rsaquo;](/learn/workflows/introduction.html "nav next workflows")

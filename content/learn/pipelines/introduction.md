@@ -13,9 +13,10 @@ within pipelines.
 
 ![image](/images/pipelines.svg)
 
-Currently wercker support three types of pipelines; a **dev**, **build** and a
-**deploy** pipeline. Pipelines can be executed locally through the
-[CLI](/learn/basics/workflow.html) and on the wercker platform, with the
+With Wercker you can **create any kind of pipeline** you need. There is one
+reserved pipeline, [dev](/cli/usage/developing.html), which can be used to
+develop locally. Pipelines can be executed locally through the
+[CLI](/learn/basics/developer-flow.html) and on the wercker platform, with the
 exception of the **dev** pipeline which can **only** be executed locally.
 
 In the following paragraphs we will describe the elements that make up the

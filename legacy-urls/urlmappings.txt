@@ -5,7 +5,7 @@
 articles/gettingstarted/repositoryaccess.html | http://old-devcenter.wercker.com/articles/gettingstarted/repositoryaccess.html
 articles/gettingstarted/cli.html | http://old-devcenter.wercker.com/articles/gettingstarted/cli.html
 articles/gettingstarted/werckerbot.html | http://old-devcenter.wercker.com/articles/gettingstarted/werckerbot.html
-articles/gettingstarted/web.html | /learn/basics/workflow.html
+articles/gettingstarted/web.html | /learn/basics/developer-flow.html
 articles/gettingstarted/index.html | http://old-devcenter.wercker.com/articles/gettingstarted/index.html
 articles/werckeryml/validate.html | http://old-devcenter.wercker.com/articles/werckeryml/validate.html
 articles/werckeryml/index.html | http://old-devcenter.wercker.com/articles/werckeryml/index.html
@@ -83,8 +83,8 @@ learn/steps/01_introduction.html | /learn/steps/introduction.html
 learn/steps/02_using-steps.html | /learn/steps/using-steps.html
 learn/steps/03_after-steps.html | /learn/steps/after-steps.html
 learn/steps/04_step-registry.html | /learn/steps/step-registry.html
-learn/basics/the-wercker-cli.html | /learn/basics/workflow.html
-learn/basics/using-the-web-interface.html | /learn/basics/workflow.html
+learn/basics/the-wercker-cli.html | /learn/basics/developer-flow.html
+learn/basics/using-the-web-interface.html | /learn/basics/developer-flow.html
 learn/wercker-yml/introduction.html | /learn/basics/configuration.html
 learn/wercker-yml/sections.html | /learn/pipelines/available-pipelines.html
 learn/wercker-yml/environment-variables.html | /learn/basics/configuration.html

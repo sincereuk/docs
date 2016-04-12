@@ -1,6 +1,6 @@
 ## Introduction to wercker
 
-Wercker is a [Docker](http://docker.com/)-based platform for developing,
+Wercker is a container-centric platform for developing,
 building and delivering your applications in the modern world of microservices,
 containers and the cloud.
 
@@ -26,22 +26,21 @@ carefully.
 
 Wercker lets you do just that. By setting up automated development pipelines,
 very much in the spirit of “release early, release often”, you can build and
-deploy your services with just a git push. You can then let wercker compile and
+deploy your services with just a git push. You can then let Wercker compile and
 run any other steps that are necessary to build your project before it gets
-deployed to a [target](http://devcenter.wercker.com/docs/deploy/steps.html) of
-your choosing.
+deployed to a target of your choosing.
 
 Under the hood wercker leverages Docker containers to not only allow automated
 pipelines, but also isolated environments to run code in. Wercker runs your
 code in a container, takes it through what we call
-[steps](http://devcenter.wercker.com/docs/steps/index.html) and saves the
+[steps](/docs/steps/index.html) and saves the
 output as a container.
 
 Wercker also works for developers working on websites, blogs or apps that are
-not necessarily as complex. Because wercker is also a workflow and not only a
+not necessarily as complex. Because Wercker is also a workflow and not only a
 platform, we encourage you to start using wercker from the get-go with [wercker
 dev](http://blog.wercker.com/2015/05/15/Introducing-local-development.html).
 This sets you up with a container locally and allows you to start developing in
 that container, without changing your existing workflow.
 
-[Workflow &rsaquo;](/learn/basics/workflow.html "nav next basics")
+[Developer flow &rsaquo;](/learn/basics/developer-flow.html "nav next basics")

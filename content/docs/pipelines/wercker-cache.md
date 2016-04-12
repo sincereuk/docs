@@ -1,8 +1,9 @@
 ## Using wercker cache
 
-A cache directory is shared between builds and deploys. The path to this
-directory is stored in the environment variable `$WERCKER_CACHE_DIR`. A step
-can leverage this cache to share assets between builds.
+A cache directory is shared between [chained
+Workflows](/docs/workflows/index.html). The path to this directory is stored in
+the environment variable `$WERCKER_CACHE_DIR`. A step can leverage this cache
+to share assets between builds.
 
 ### Dependency installers
 Out of the box we've enabled caching by default for three dependency
@@ -16,8 +17,8 @@ These steps leverage the cache to shorten the installation time of
 dependencies.  This works by storing the end-result of the downloading and
 compiling of dependent packages.
 
-Future builds can use this as a starting point and only new dependencies which
-were not cached are downloaded. At the start of every build the cache directory
+Future pipeline executions can use this as a starting point and only new dependencies which
+were not cached are downloaded. At the start of every pipeline run the cache directory
 is filled with the cached content from the last successful build, if not older
 than 14 days (and is < 1GB).
 
@@ -37,4 +38,4 @@ fi
 
 This example checks for the file `$WERCKER_CACHE_DIR/mystep/a-dependency.bin`
 from the cache. If the file is not found, it will be downloaded to the cache
-directory so it will be available for future builds, if the build succeeds.
+directory so it will be available for future pipeline runs, if the run succeeds.

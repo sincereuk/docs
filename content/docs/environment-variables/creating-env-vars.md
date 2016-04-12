@@ -9,7 +9,7 @@ both a `text` and `SSH Key pair` environment variable.
 ### <a name="text-env-var" class="anchor"></a>Creating a text environment variable
 
 Creating a new environment variable is as simple as filling in a name, value and
-hit Add. The next build or deploy you will trigger now has the environment variable
+hiting Save. The next pipeline run you will trigger now has the environment variable
 available in its pipeline.
 
 
@@ -49,15 +49,16 @@ are `SSH key pairs`. Wercker can help you generate them for you and will only ex
 the public part of the pair via the interface. During a pipeline run, the key pair
 is exposed via two environment variables ending with: `_PRIVATE` and `_PUBLIC`.
 
-#### Creating a SSH key pair variable
+To use the SSH key pairs in wercker, you have to do two things:
 
-When creating a SSH key pair variable you can choose to let Wercker generate a pair
-or use an existing one that got created earlier.
+* Let Wercker generate a pair, [read more on creating a SSH key pair &rsaquo;](/docs/ssh-keys/generating-ssh-keys.html)
+* Create a variable
 
-Wercker will save the generated key pairs in the [SSH key section &rsaquo;](/docs/ssh-keys/index.html)
+Instead of `text`, choose the `SSH Key pair` option, and select the `SSH Key pair`
+you just created.
 
 When you create a new variable for the `SSH key pair`, you will notice that you
-are actually creating two environment variables who are based on the name you are entering.
+are actually creating two environment variables that are based on the name you are entering.
 
 For instance if you created an `SSH key pair` to use as a bitbucket deploy key,
 you may want to name the variable `DEPLOY_KEY`. During the pipeline

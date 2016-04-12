@@ -6,7 +6,7 @@ tags: yml
 
 A `wercker.yml` defines your automation pipeline for builds and deploys.
 
-Below a complete working example for a `nodejs` application.
+Below is a complete working example for a `nodejs` application.
 
 ```yaml
 box: nodesource/trusty

@@ -2,9 +2,13 @@
   [
     "basics",
     "introduction.md",
-    "workflow.md",
+    "developer-flow.md",
     "configuration.md"
   ],
+	[
+	  "workflows",
+		"introduction.md"
+	],
   [
     "pipelines",
     "introduction.md",

@@ -2,6 +2,11 @@
   [
      "about"
   ],
+	[
+		"workflows",
+		"managing.md",
+		"chaining.md"
+	],
   [
      "pipelines",
      "per-pipeline-containers.md",
@@ -19,7 +24,6 @@
      "private-containers.md",
      "pushing-containers.md",
      "minimal-containers.md",
-     "tested-containers.md",
      "entrypoint.md"
   ],
   [
@@ -38,22 +42,6 @@
      "script-step.md",
      "install-packages.md",
      "creating-steps.md"
-  ],
-  [
-     "deploy",
-     "multi-deploy-targets.md",
-     "auto-deploy.md",
-     "steps.md",
-     "heroku.md",
-     "amazon-ecs.md",
-     "s3.md"
-  ],
-  [
-     "languages",
-     "golang.md",
-     "nodejs.md",
-     "python.md",
-     "ruby.md"
   ],
   [
      "environment-variables",

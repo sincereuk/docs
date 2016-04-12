@@ -10,7 +10,7 @@ that have a lot of cruft or dependencies installed that you don't need.
 
 With wercker you can create the most minimal container, which is purely
 based off the files in the `$WERCKER_OUTPUT_DIR` folder that you've
-either collected or created during a build pipeline.
+either collected or created during a pipeline execution.
 
 ### The internal/docker-scratch-push step
 
@@ -69,7 +69,7 @@ The ability to create Go packages that call C code is disabled with the
 debug information is removed with the `-ldflags` flag, resulting in an even smaller binary.
 
 The final executable is copied into the `$WERCKER_OUTPUT_DIR` making it
-available to the deploy pipeline.
+available to the next pipeline execution.
 
 The deploy pipeline also uses the same `google/golang` box, but it is of
 little interest for this deploy. Using the `internal-docker-scratch`
