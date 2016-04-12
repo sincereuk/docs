@@ -58,3 +58,5 @@ triggered by **hooks**, which can be of type **Git** or **Workflow**.
 Workflows can be run in **parallel** and can be **chained together**. Workflows
 give you the tools to create complex, automated developer flows to build and
 deploy your container-based applications.
+
+[Pipelines &rsaquo;](/learn/pipelines/introduction.html "nav next pipelines")

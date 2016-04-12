@@ -60,4 +60,4 @@ throughout your pipeline. You can read more about which variables get injected
 in the [documentation](/docs/environment-variables/index.html).
 
 [&lsaquo; Developer flow](/learn/basics/developer-flow.html "nav previous basics")
-[Pipelines &rsaquo;](/learn/pipelines/introduction.html "nav next pipelines")
+[Workflows &rsaquo;](/learn/workflows/introduction.html "nav next workflows")
