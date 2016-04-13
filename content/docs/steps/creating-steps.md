@@ -26,7 +26,7 @@ various Docker containers people use, making them quite portable. If you
 do create a step in a different programming language, and require certain
 run time components, make sure to document this in the step README.
 
-### The Step Manifest file
+### <a name="the-step-manifest-file" class="anchor"></a> The Step Manifest file
 
 The step manifest file defines the configuration of your step. Below an example
 of a wercker step manifest which we'll go over:
@@ -64,7 +64,7 @@ the unique identifier of your step (`username/name`).
 The `version` field is the specific version of the step when deploying. This
 field needs to be unique for your step and must adhere to the [semantic version
 scheme](http://semver.org). Your first version would be `0.1.0` and each minor
-change would bump up the last digit by one. 
+change would bump up the last digit by one.
 
 Only `name` and `version` are required. All the following properties are
 optional, though we encourage people to use them.
@@ -86,14 +86,14 @@ and the value is a object with the following properties:
 - `default` - value that gets used, if no parameter was provided through the
 wercker.yml
 
-### The run.sh file
+### <a name="the-run-sh-file" class="anchor"></a> The run.sh file
 
 The `run.sh` file contains the entrypoint your step logic. This should be
 `bash` code in the `run.sh` file itself. If you want to create a more complex
 application in a different language, than call this from within the `run.sh`
 file.
 
-For each property you specified in your `wercker-step.yml`, wercker sets a 
+For each property you specified in your `wercker-step.yml`, wercker sets a
 corresponding environment variable. For example, the value of the `url` property
 would be made available in the `$WERCKER_SLACK_NOTIFIER_URL` environment variable.
 
