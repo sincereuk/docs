@@ -58,3 +58,7 @@ MARIADB_PORT_3306_TCP_ADDR=172.X.X.X
 ```
 
 Read more about the MariaDB container on [Docker Hub](https://registry.hub.docker.com/_/mariadb/)
+
+### Known issues
+
+Please note that mysql adn mariadb docker images have issues with starting the database in time, see https://github.com/docker-library/docs/tree/master/mysql#no-connections-until-mysql-init-completes. As a counter measure make sure to leave enough time, or implement a waiting mechanism to ensure the database is ready.
