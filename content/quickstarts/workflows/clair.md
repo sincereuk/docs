@@ -1,6 +1,6 @@
 ## CoreOS Clair Security Scanner
 
-Clair is an open source project for the static analysis of vulnerabilities in appc and docker containers. It is currently integrated with Quay, which makes it very easy to enable security scans and alerting. In this quickstart we'll show you how to setup a repository, and how to setup alerting.
+[Clair](http://github.com/coreos/clair) is an open source project for the static analysis of vulnerabilities in appc and Docker containers. It is currently integrated with [Quay](http://quay.io), the container registry from CoreOS, which makes it very easy to enable security scans and alerting. In this quickstart we'll show you how to setup a repository, and how to setup alerting.
 
 Quay has enabled automatic scanning for each existing repository and any new repositories. This means that any new image that will be pushed to Quay will be scanned, and this will reported through the interface.
 
@@ -13,3 +13,5 @@ Now that you've setup the Quay repository you can simply use the [internal/push 
 Once activated you will see alerts coming if for different tags.
 
 ![image](/images/danger.png)
+
+One strategy for mitigating vulnerabilities is to leverage minimal containers.

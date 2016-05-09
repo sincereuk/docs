@@ -16,6 +16,10 @@
     "kubernetes.md"
   ],
   [
+    "workflows",
+    "clair.md"
+  ],
+  [
     "advanced",
     "building-minimal-containers-with-go.md"
   ]
