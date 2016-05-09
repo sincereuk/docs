@@ -62,7 +62,7 @@ For Workflow-based hooks you can specify any amount of Workflows that this
 Workflow should listen on. For Git-based hooks you can specify on which branch
 this Workflow should start.
 
-Finally each target can have one of the following permission requirements:
+Finally each Workflow can have one of the following permission requirements:
 
 1. Public
 2. View runs
@@ -71,9 +71,9 @@ Finally each target can have one of the following permission requirements:
 
 **Public**:  If both your application and Workflow are set to **public** everyone will be able to see the runs executed for that Workflow. If your application is not public, all your collaborators (regardless of their permissions) will be able to see runs executed for that Workflow.
 
-**View runs:** Allow only collaborators with ‘view runs’ permissions to manage this target
+**View runs:** Allow only collaborators with ‘view runs’ permissions to manage this Workflow
 
-**View Runs + Manage workflows**: Allow only collaborators with ‘View runs + Manage workflows’ to manage this target
+**View Runs + Manage workflows**: Allow only collaborators with ‘View runs + Manage workflows’ to manage this Workflow
 
 **Admin**: Only administrator collaborators can manage this Workflow
 
