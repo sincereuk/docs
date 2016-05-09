@@ -6,6 +6,5 @@ the wercker toolchain.
 Get started with one of these guides:
 
 * [Heroku](/quickstarts/deployment/heroku.html)
-* [Mesosphere](/quickstarts/deployment/mesosphere.html)
 * [ECS](/quickstarts/deployment/ECS.html)
 * [Kubernetes](/quickstarts/deployment/kubernetes.html)

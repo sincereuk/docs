@@ -4,11 +4,9 @@
 
 Workflows provide you with a mechanism to manage your [pipelines](/docs/pipelines/index.html).
 With Workflows, you can create **any type of pipeline**, and more importantly **chain them
-together**. 
+together**.
 
-Workflows can only be defined in the UI and consists of a name, 
-a [hook type](/docs/workflows/managing.html) and a [pipeline name](/docs/pipelines/index.html)
-which is defined in your [wercker.yml](/docs/wercker-yml/index.html).
+![image](/images/workflow-editor.png)
 
 Read more about creating Workflows [here](/docs/workflows/managing.html).
 
@@ -17,8 +15,8 @@ Read more about creating Workflows [here](/docs/workflows/managing.html).
 #### Example #1: Build, push and release
 
 Building and deploying a container is preferably done in multiple phases or
-Workflows. The **first phase** can be to build and test your application with
-all the dev dependencies included. 
+pipelines. The **first phase** can be to build and test your application with
+all the dev dependencies included.
 
 ![image](/images/build-push-release.svg)
 
@@ -49,7 +47,7 @@ time to finish.
 Previously, when that part of the pipeline would fail, you would have to
 restart the entire thing. With Workflows however, you can now split off that
 part of the pipeline and put it in a new Workflow.  That way, if it fails, you
-will be able to re-run just that Workflow which makes for much better build
+will be able to re-run just that pipeline which makes for much better build
 times.
 
 #### Example wercker.yml
