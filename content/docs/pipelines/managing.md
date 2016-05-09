@@ -7,7 +7,7 @@ This section describes how pipelines can be defined and updated on the hosted We
 To create a new pipeline so that it can be used in [Workflows](/docs/workflows/index.html) you must:
 
 1. Give it a name e.g.: “**deploy-to-dockerhub**”;
-2. Decide how this workflow gets executed; This can be a Git or another Workflow hook;
+2. Decide how this pipeline gets executed; This can be a Git source or another pipeline (default);
 3. Specify which pipeline you would like to execute; the pipeline-name
 corresponds to the pipeline-name as you defined it in your wercker.yml;
 
@@ -43,6 +43,6 @@ Each pipeline can have one of the following permission requirements:
 
 **View runs:** Allow only collaborators with ‘view runs’ permissions to manage this pipeline
 
-**Execute & Manage pipelines**: Allow only collaborators with ‘View runs + Manage workflows’ to manage this pipeline
+**Execute & Manage pipelines**: Allow only collaborators with ‘View Execute & Manage workflows’ to manage this pipeline
 
 **Admin**: Only administrator collaborators can manage this pipeline
