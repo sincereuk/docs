@@ -4,8 +4,8 @@ In this tutorial, we’ll discuss how to implement continuously deploy your cont
 
 ### Requirements
 
-* A Wercker [account]("https://app.wercker.com/users/new")
-* The tweeter app, forked from [here]("https://github.com/wercker/tweeter")
+* A Wercker [account](https://app.wercker.com/users/new)
+* The tweeter app, forked from [here](https://github.com/wercker/tweeter)
 * A running DC/OS cluster with Marathon installed
 * A dockerhub repository called **tweeter**
 
@@ -221,7 +221,7 @@ And finally, we push this minified version of our container to the registry, and
 
 Deploying an application to Marathon involves creating a JSON file that specifies how the application should run and which dependencies it might have. To that end, we created the `template.sh` script, which generates such a JSON file. The file should be relatively self-explanetory, so we won’t go into detail about it here.
 
-The` deploy-to-mesosphere` pipeline will execute this script and then, using the [marathon-deploy]("https://app.wercker.com/#search/steps/marathon") step, do an API call to let Marathon know we have a new version of our application available.
+The` deploy-to-mesosphere` pipeline will execute this script and then, using the [marathon-deploy](https://app.wercker.com/#search/steps/marathon) step, do an API call to let Marathon know we have a new version of our application available.
 
 ```
 deploy-to-marathon:
@@ -265,7 +265,7 @@ Now that we’ve defined all the pipelines we can chain them together! Navigate 
 
 #### Preparing DC/OS for deployment
 
-The tweeter app requires Cassandra and Kafka installed. In the DC/OS interface you can install these packages, as explained in[ this tutorial](https://docs.mesosphere.com/usage/tutorials/containerized-app/).
+The tweeter app requires Cassandra and Kafka installed. In the DC/OS interface you can install these packages, as explained in [this tutorial](https://docs.mesosphere.com/usage/tutorials/containerized-app/).
 
 ### Wrapping up
 
