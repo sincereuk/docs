@@ -1,392 +1,272 @@
-## Mesosphere
+## Mesosphere DC/OS
 
-### Screencast
-
-The screencast for this tutorial can be found here:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LBUm_gTrdDQ" frameborder="0" allowfullscreen></iframe>
-
-In this post we'll discuss how to deploy a project consisting of two services
-to Mesosphere, or more specifically a running Marathon instance. One service
-will be a web application that outputs simple JSON, and the other will be a
-router application that will direct traffic to the correct hosts (more on that
-later). We'll explain how to setup an automated workflow that will allow you to
-easily update, replace and scale your applications on Mesosphere using wercker.
-
-Mesosphere is an Operating System for Datacenters. It allows you to easily
-deploy, run and scale your apps while providing a single interface to do so.
-This makes it a perfect deploy target for wercker!
-
-It uses the open-source [Marathon](https://mesosphere.github.io/marathon/), a _cluster-wide
-init and control system for services in cgroups or Docker containers_, to
-manage and launch apps.
-
-You can read more about Mesosphere [here](https://mesosphere.com).
-
-Wercker is an open platform and toolchain for developing, building and
-deploying containerized applications in an automated fashion. Wercker uses
-[Docker](http://docker.com) as its underlying container technology.
-
-Sign up and read more about wercker [here](https://wercker.com)
-
-Let's get started!
+In this tutorial, we’ll discuss how to implement continuously deploy your containerized applications onto Marathon running on top of DC/OS. We will be using Mesosphere’s own sample app, tweeter, with some slight modifications to deploy.
 
 ### Requirements
 
-* A clone of the [wercker-mesosphere](https://github.com/wercker/wercker-mesosphere) repository
-* A clone of the [router](https://github.com/wercker/mesosphere-router) repository
-* An [account on wercker](https://app.wercker.com/users/new) and wercker repositories for each abovementioned project
-* A running [mesosphere cluster](https://mesosphere.com/amazon)
+* A Wercker [account]("https://app.wercker.com/users/new")
+* The tweeter app, forked from [here]("https://github.com/wercker/tweeter")
+* A running DC/OS cluster with Marathon installed
+* A dockerhub repository called **tweeter**
 
-### Overview
+### Application architecture
 
-Before we start, let's take a look at how our Mesosphere setup looks like.
+Tweeter is a simple twitter clone developed in Rails. It uses Cassandra for storage and (optionally) Kafka as the message queue. Using Wercker, we will be building a container that is fit to run on Marathon, and another image that we can use to debug and develop the application locally.
 
-![image](https://docs.mesosphere.com/assets/securityzones-5172eb8e70fb1a4c25a50b663b731929.png)
+### Configuring Wercker
 
-If you followed the mesosphere tutorial for AWS, this is how your
-infrastructure should look like. For this demo, we're primarily interested in
-the public and the **private worker** nodes depicted above.
-
-The app that we will be deploying is a simple web application that outputs json
-and is run inside a Docker container. This app will be run on one or more
-private nodes. These private nodes, as their name implies, are not accessible from the
-Internet. This is where a second application, the **edgerouter** application
-comes into play. The edgerouter is in charge of routing any incoming traffic to
-containers on any of the private slaves.
-
-This means that our application consists of two components: the router and the
-web application itself.
-
-### Configuring AWS EC2 Security Groups
-In order to to successfully deploy applications with wercker, we have to
-whitelist some of wercker's IP addresses. This can be done by editing the
-Security Groups (SGs) found under the **Network & Security** tab in EC2.
-
-You'll have to look for something similar to "**MesoAdminSecurityGroup**" SG
-and then edit the **inbound** ruleset so that it contains the following IP
-ranges as specified in this [GitHub
-issue](https://github.com/wercker/support/issues/47).
-
-_note: Don't forget to add `/32` at the end of every IP to indicate the range._
-
-![image](/images/ec2_sg.png)
-
-### Setting up the web application
-The first step is to get our web application deployed. In the
-`wercker-mesosphere` project directory, open `main.go` in your favourite
-editor and add a new city the JSON array.
-
-```golang
-data := []byte(`{"cities":{"cities":"San Francisco, Amsterdam, Berlin, New York, Tokyo, Warsaw, London"}`)
-```
-
-Once you've done that, we can take a look at the wercker.yml to see what
-wercker is going to do for us:
+Wercker’s configuration lives in one file: the **wercker.yml**. In the **wercker.yml** we will specify several automation pipelines that define how our application should be tested, built and then deployed. The end result will look like this:
 
 ```yaml
-box: golang
-# Build definition
-build:
-  # The steps that will be executed on build
+box: rails:4.1
+dev:
+  services:
+    - spotify/cassandra
+#    - spotify/kafka
   steps:
-    # Build the project
-    - script:
-        name: go build ./...
-        code: go build ./...
-    - script:
-        name: copy binary
+    - bundle-install
+    - internal/watch:
         code: |
-          cp source $WERCKER_OUTPUT_DIR/app
-          cp template.sh $WERCKER_OUTPUT_DIR
-```
-
-The build pipeline is nothing special. It builds our app and then copies the
-binary and the template (we'll get to that later) to the `$WERCKER_OUTPUT_DIR`
-which makes it available to the deploy pipeline. What's more interesting is our
-deploy pipeline, which we'll define now.
-
-### Defining the deploy pipeline
-Open up your **wercker.yml** and just below the build pipeline, add the
-following:
-
-```yaml
-deploy:
-  dockerhub:
-    - internal/docker-push:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
-        repository: $APP_IMAGE
-        cmd: "/pipeline/source/app"
-        ports: "$CONTAINER_PORT"
-  marathon:
+          until bundle exec rake cassandra:setup; do echo "waiting..."; sleep 5; done;
+          bundle exec rspec
+          rails server
+        reload: false
+test:
+  services:
+    - spotify/cassandra
+  steps:
+    - bundle-install
     - script:
-        name: generate json
-        code: chmod +x template.sh && ./template.sh
-    - wercker/marathon-deploy:
-        marathon-url: $MARATHON_ENDPOINT
+        name: setup cassandra
+        code: until bundle exec rake cassandra:setup; do sleep 5; done;
+    - script:
+        name: rspec
+        code: bundle exec rspec
+
+build-dev:
+  steps:
+    - script:
+        name: move to rails dir
+        code: |
+              mkdir /rails
+              mv $WERCKER_SOURCE_DIR/* /rails
+    - bundle-install:
+        cwd: /rails
+    - internal/docker-push:
+        username: $USERNAME
+        password: $PASSWORD
+        cmd: rails server
+        working-dir: /rails
+        ports: 3000
+        repository: $REPOSITORY
+        tag: dev
+
+build-prod:
+  box:
+    id: alpine:3.2
+    cmd: /bin/sh
+  steps:
+    - script:
+        name: install deps
+        code: |
+          apk update && apk upgrade
+          echo installing deps
+          apk add curl-dev ruby-dev build-base tzdata
+          echo installing ruby stuff
+          apk add ruby ruby-io-console ruby-bundler
+          apk add nodejs
+          rm -rf /var/cache/apk/*
+    - script:
+        name: bundle install
+        code: |
+          gem install bundler
+          # bundle install --without development test
+          bundle install
+    - internal/docker-push:
+        username: $USERNAME
+        password: $PASSWORD
+        cmd: rails server
+        working-dir: /pipeline/source
+        ports: 3000
+        repository: $REPOSITORY
+        tag: alpine
+
+deploy-to-marathon:
+  box:
+    id: buildpack-deps:jessie
+  steps:
+    - script:
+        name: generate json file
+        code: |
+          chmod +x template.sh
+          ./template.sh
+          cat $APP_NAME.json
+    - marathon-deploy:
+        marathon-url: $MARATHON_URL
         app-name: $APP_NAME
-        app-json-file: $APP_NAME.json
-        instances: "$INSTANCES"
+        app-json-file: $APP_JSON
+        instances: "3"
+        auth-token: $MESOS_TOKEN
 ```
 
-The first important thing to note is that our deploy pipeline consists of two
-deploy targets: `dockerhub` and `marathon`.
+Don’t worry if it seems like a lot, we’ll be going over every pipeline in the next couple of sections. One thing to take note of, however is the usage of various environment variables.
 
-Because our app is going to live inside a container, every time we make any
-changes to the sourcecode, we need to push it to a registry (in this case
-[DockerHub](https://hub.docker.com/)).
+If we want to use Wercker locally using the CLI, we’ll need to define these env vars somewhere. By default, Wercker will look for an ENVIRONMENT file, and if present, expose those env vars when executing the pipelines. Alternatively, you can specify a custom file by using the` --environment <your_file>` flag. You can copy/paste the following into that file:
 
-However, if we merely want to scale the amount of instances up or down, there's
-no need to push our image to DockerHub again, which is why we have the second
-deploy target. You can read more about defining multiple deploy targets in the
-[devcenter](http://devcenter.wercker.com/docs/deploy/multi-deploy-targets.html).
-
-To deploy apps to Mesosphere, it requires json files that describe the app and
-the config needed to run it. This config is generated by the `script` step in
-our `marathon` deploy target. If you open the `template.sh` script in your
-project directory, you'll see that all it does is interpolates the necessary
-environment variables and outputs the result in `$APP_NAME.json`.
-
-In short, our deploy process will consist of two steps: first we need to push
-our app to DockerHub and then we must deploy our json configuration to
-Mesosphere.
-
-### Setting up the deploy targets
-First, if you have not already done so, you need to create a new app on
-wercker. Use your forked / cloned `wercker-mesosphere` project as repository.
-
-Next, we need to add the two deploy targets we'll be working with,
-corresponding with the deploy targets we specified in our **wercker.yml**
-earlier. Head over to your application settings and go to **Deploy targets**.
-Click on **Add deploy target** and select **custom**. Name your deploy target
-**dockerhub** and click **save**.
-
-#### DockerHub deploy target
-For our `dockerhub` deploy target, we're going to setup **two** environment
-variables to make our deployment easier: `$DOCKER_USERNAME` and
-`$DOCKER_PASSWORD`. These should container your DockerHub username and
-password, respectively.  Make sure these environment variables coincide with
-the **wercker.yml** snippets you use throughout the blogpost and that you're
-`$DOCKER_PASSWORD` is set to **protected**, so that it won't show up in any
-logs.
-
-#### Mesosphere Deploy target
-Once you're done with the `dockerhub` deploy target, hit **save** and again set up
-a new deploy target. This time, call it `mesosphere` and hit **save** once more.
-
-For this deploy target, we'll setup **three** environment variables:
-`$MARATHON_ENDPOINT`, `$INSTANCES` and `$APP_NAME`. `$MARATHON_ENDPOINT` should
-contain the URL where your marathon instance lives. If you have your mesosphere
-cluster setup on AWS, it should look something like this:
-`http://mesospher-elasticl-<unique-hash>.amazonaws.com/service/marathon/`.
-
-`$INSTANCES` should specify how many instances of your webapp you want to
-deploy. For this tutorial, we'll set this value to **3**.  Lastly, `$APP_NAME`
-should contain the name of the app that marathon will use. For this tutorial,
-let's call it `meso-demo`.
-
-![image](/images/envvars_webapp_meso.png)
-
-#### General environment variables
-There are two environment variables, `$APP_IMAGE` and `$CONTAINER_PORT` that
-are shared betweewn the two deploy targets. Since they're shared, we can
-specify them as project-wide environment variables.
-
-To do this, head over to the `Environment variables` tab and create a new env
-var.  The `$APP_IMAGE` should contain the `repository/image` you will be
-pushing the container to. Set this value to whatever DockerHub repository you
-will be pushing to. The `$CONTAINER_PORT` value should specify which port the
-application will be running on. This will be port `3000`.
-
-![image](/images/envvars_webapp_general.png)
-
-### Deploying the web application
-Now that we've setup our web application, we can commit our changes and see our
-wercker build run!
-
-```no-highlight
-git commit -am 'added deploy pipeline'
-git push
+```
+XXX_USERNAME=your_dockerhub_username
+XXX_PASSWORD=your_dockerhub_password
+X_APP_NAME=tweeter
+X_APP_JSON=tweeter.json
+X_REPOSITORY=dockerhub_username/tweeter
+X_CONTAINER_PORT=3000
+# found in your cloudformation output
+X_MESOS_DNS_HOST=mesos_master_dns_address
+# generated by logging into the DCOS cli
+XXX_MESOS_TOKEN=your_token
+X_MARATHON_URL=http:$MESOS_DNS_HOST/service/marathon
+X_INSTANCES=3
+X_CASSANDRA_HOSTS="cassandra"
 ```
 
-Head over to your project page on wercker and see the build run. Once it
-successfully finishes, hit the **deploy to** button and select **dockerhub**.
+### Developing Locally
 
-This will trigger a deploy that will push our image to DockerHub, as we
-described in our wercker.yml. Once this deploy finishes, head back to your
-build page and hit the **deploy to** button again, but this time select
-**mesosphere**.
+Now that we’ve configured Wercker, let’s start out by taking a close look at the `dev` pipeline. We use this pipeline to develop our application inside a container on our local machine. By spinning up our applications, alongside its required services in containers, we achieve a higher level of dev/prod parity.
 
-Once the pipeline completes, you should see that Marathon is now deploying our
-new app!
-
-![image](/images/web_deploy_meso.png)
-
-### Setting up the router
-Our app is now tucked away in a container on one or more of our private
-worker nodes. To be able to use our application, we'll need to setup a router
-which will route traffic coming from the Internet to correct destination.
-
-To setup our router, we need to follow the same steps as we did for our web
-application. That means we need to create a project on wercker, using your
-forked / cloned app as target repository.
-
-For the `marathon` target, create: `$MARATHON_ENDPOINT`, `$INSTANCES` and
-`$APP_NAME`. For the `$APP_NAME` env var, we need to specify **the name of our
-webapp** that Marathon will work with, because our router needs to know to
-which Marathon app it needs to communicate with. In our case, this should be
-`meso-demo`.
-
-The `$INSTANCES` env var describes how many instances of the app
-you want to launch. Since we only require 1 instance of the router, you can
-optionally exclude this env var as the default is 1 instance anyway. For
-clarity, we'll explicitly define it here.
-
-Finally, we need three more env var that will be shared between the two deploy
-targets, so head to the **Environment Variables** settings and add the
-`$APP_IMAGE`, `$DOCKER_USERNAME` and `$DOCKER_PASSWORD` environment variables.
-`$APP_IMAGE` will hold the image name of our router; you can use your
-`DockerHubUsername/repository` here. We're specififying our Docker credentials
-as general environment variables, because we're not going to have a `dockerhub`
-deploy target this time. Instead, our `docker-push` will take place in our
-build pipeline.
-
-### Setting up the build pipeline
-Now that we've setup our env vars, we can take a look at our actual pipeline.
-This is the complete build pipeline for the router app:
-
-```yaml
-box: debian:jessie
-build:
+```
+dev:
+  services:
+    - spotify/cassandra
   steps:
-    - install-packages:
-        packages: wget build-essential libreadline-dev libncurses5-dev
-    - script:
-        name: install ngx
+    - bundle-install
+    - internal/watch:
         code: |
-          wget http://openresty.org/download/ngx_openresty-1.7.10.1.ta
-            && tar xvfz ngx_openresty-1.7.10.1.tar.gz \
-            && cd ngx_openresty-1.7.10.1 \
-            && ./configure --with-luajit --with-http_gzip_static_modul
-            && make \
-            && make install \
-            && rm -rf /ngx_openresty*
-    - script:
-        name: mkdir
-        code: mkdir -p mkdir /usr/local/openresty/nginx/conf
-    - script:
-        name: cp template.sh
-        code: cp template.sh $WERCKER_OUTPUT_DIR
-    - script:
-        name: cp config & chmod
-        code: cp nginx.conf app.lua /usr/local/openresty/nginx/conf/ &
-    - internal/docker-push:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
-        repository: $APP_IMAGE
-        cmd: "/usr/local/openresty/nginx/sbin/nginx"
-        ports: "8080"
+          until bundle exec rake cassandra:setup; do wecho "waiting..."; sleep 5; done;
+          bundle exec rspec
+          rails server
+        reload: false
 ```
 
-Our router is essentially a `nginx` container with some custom LUA configuration
-files that allow the traffic to be forwarded accordingly (this is where the
-`$APP_NAME` env var gets used). You can open up the `app.lua` file in the
-router project directory to see how it works exactly.
+In the `services` clause, we inform Wercker to spin up a Cassandra container. We use Spotify’s container here because it’s an optimized version. Then, after installing our dependencies using `bundle-install`, we specify which command should be executed once our container is spun up. In this case we need to setup cassandra and wait until the migrations complete. Then, we run our tests and finally we run `rails server` to serve our application.
 
-We're specifying our `docker-push` here, because we need the `nginx`
-installation included in our image.
+To see the dev pipeline in action, execute the following command in your terminal:
 
-Now that we've discussed the build pipeline, it's time to add the deploy
-pipeline to our **wercker.yml**:
+```
+wercker dev --publish 3000
+```
 
-```yaml
-deploy:
+Wercker will now execute the `dev` pipeline. You should see containers coming up with the docker ps command, and once the rails server has successfully loaded, you can go to `<your_docker_host_ip>:3000` and see our rails app in action:
+
+```
+--> Running step: watch
+Finished in 12.37 seconds (files took 1 minute 33.09 seconds to load)
+1 example, 0 failures
+
+[2016-05-08 08:32:55] INFO  WEBrick 1.3.1
+[2016-05-08 08:32:55] INFO  ruby 2.1.5 (2014-11-13) [x86_64-linux]
+[2016-05-08 08:32:55] INFO  WEBrick::HTTPServer#start: pid=37 port=3000
+```
+
+![image](/images/tweeter.png)
+
+### Building the container
+
+After setting up our local development environment we can now move on to setting up the pipelines that will build our container images. Our Workflow will look like this:
+
+![image](/images/diagram-mesosphere.svg)
+
+#### Setting up testing
+
+In the test pipeline, we make sure that our application gets tested before we start building our containers. Again we need Cassandra to run our tests in, so we specify it in the services clause. Then we simply execute some code which we’ve already seen before in the `dev` pipeline.
+
+Once the test pipeline completes, we will setup Wercker in such a way that it will trigger two pipelines simultaneously: `build-dev` and `build-prod`.
+
+#### Building a development image
+
+At Wercker, we consider it a best-practice to split up your containers into a debug container and a production-ready container. This pipeline will create a development image and is relatively straightforward: running` bundle install` and then pushing the resulting container to a registry. We can then use this image to easily distribute the latest version of our application to team members.
+
+#### Building a production-ready image
+
+When building containers for production, it’s a good idea to make it as much of a clean package as possible. That means getting rid of any dependencies and other files we don’t need. It also means reconsidering which base image we’re using and if we need a full-fledged OS (most of the times, we don’t). So in our build-prod pipeline we replace our rails image with an alpine. This gives us a much smaller footprint to start things off. Of course this means we need to install Ruby and all the build dependencies required to do that.
+
+```
+build-prod:
+   45   box:
+   46     id: alpine:3.2
+   47     cmd: /bin/sh
+   48   steps:
+   49     - script:
+   50         name: install deps
+   51         code: |
+   52           apk update && apk upgrade
+   53           echo installing deps
+   54           apk add curl-dev ruby-dev build-base tzdata
+   55           echo installing ruby stuff
+   56           apk add ruby ruby-io-console ruby-bundler
+   57           apk add nodejs
+   58           rm -rf /var/cache/apk/*
+   59     - script:
+   60         name: bundle install
+   61         code: |
+   62           gem install bundler
+   63           # bundle install --without development test
+   64           bundle install
+```
+
+And finally, we push this minified version of our container to the registry, and tag it with `alpine`.
+
+### Deploying the result
+
+#### Defining the deploy pipeline
+
+Deploying an application to Marathon involves creating a JSON file that specifies how the application should run and which dependencies it might have. To that end, we created the `template.sh` script, which generates such a JSON file. The file should be relatively self-explanetory, so we won’t go into detail about it here.
+
+The` deploy-to-mesosphere` pipeline will execute this script and then, using the [marathon-deploy]("https://app.wercker.com/#search/steps/marathon") step, do an API call to let Marathon know we have a new version of our application available.
+
+```
+deploy-to-marathon:
+  box:
+    id: buildpack-deps:jessie
   steps:
-    - install-packages:
-        packages: curl
     - script:
-        name: generate json
-        code: chmod +x template.sh && ./template.sh
-    - wercker/marathon-deploy:
-        marathon-url: $MARATHON_ENDPOINT
-        app-name: "edgerouter"
-        app-json-file: "router.json"
+        name: generate json file
+        code: |
+          chmod +x template.sh
+          ./template.sh
+          cat $APP_NAME.json
+    - marathon-deploy:
+        marathon-url: $MARATHON_URL
+        app-name: $APP_NAME
+        app-json-file: $APP_JSON
+        instances: "3"
+        auth-token: $MESOS_TOKEN
 ```
 
-There's only one deploy target for our router, so there is no need to give a name.
+#### Setting up hosted Wercker
 
-The other difference with the web app is the json that gets generated and the
-env vars that get passed in. Your generated `router.json` will look similar to
-this:
+Now that we’ve defined all of pipelines, we’ll have to chain them together using Workflows, which can be done thru the Wercker web interface. Go ahead and create a new project on Wercker using your forked tweeter repository. Then, once your project is created, create a new Workflow using the **Manage Workflows **button in the top right.
 
-```json
-{
-  "id": "/edgerouter",
-  "cpus": 1,
-  "mem": 256,
-  "instances": 1,
-  "constraints": [["hostname", "UNIQUE"]],
-  "acceptedResourceRoles": ["slave_public"],
-  "container": {
-    "type": "DOCKER",
-    "docker": {
-      "image": "wercker/mesosphere-router",
-      "network": "BRIDGE",
-      "forcePullImage": true,
-      "portMappings": [
-          {
-              "containerPort": 8080,
-              "hostPort": 80,
-              "protocol": "tcp"
-          }
-      ]
-    }
-  },
-  "healthChecks": [{
-      "protocol": "TCP",
-      "gracePeriodSeconds": 600,
-      "intervalSeconds": 30,
-      "portIndex": 0,
-      "timeoutSeconds": 10,
-      "maxConsecutiveFailures": 2
-  }],
-  "env": {"APP_NAME": "meso-demo"}
-}
-```
+You will first need to define which pipelines are available and which environment variables they should expose.
+The `test` pipeline should contain one env var, `CASSANDRA_HOSTS` and should be set to `cassandra`. This will allow our app to find the Cassandra service through a DNS lookup. When creating this pipeline, make sure you set the hook to `Git push` instead of `default`, since this is our starting point for the Workflow we will define.
 
-Note the `env` section at the last line of the generated json. This env var will
-get injected into the container by marathon and will be used by **nginx** to
-determine which app it should route traffic to.
+Then, create the deploy-to-marathon pipeline and expose these env vars (remember you can copy/paste from your `ENVIRONMENT` file you created earlier):
 
-### Deploying the router
-Now that everything is set up, let's trigger a new pipeline by committing our
-changes:
+![image](/images/marathon_env_vars.png)
 
-```no-highlight
-git commit -am 'added deploy pipeline'
-git push origin master
-```
+Lastly, create the `build-dev` and `build-prod `pipelines. Instead of creating env vars for each of these, we’ll just create the necessary env vars on a project level (since they both require the same ones). You can add these environent variables by navigating “`environment variables`” in the project settings:
 
-Once the build pipeline completes, it will have deployed to DockerHub, so we're
-ready to deploy it to Marathon next. As before, hit the **deploy to** button
-and select `marathon`.
+![image](/images/marathon_project_env_vars.png)
 
-Once everything is deployed, head over to your Marathon dashboard and verify
-everything is being deployed. When the router is deployed, it will still take a
-while to propegate the changes. Head over to the public worker's URL and then
-keep hitting that refresh button until our JSON appears.
+#### Creating the Workflow
 
-Once it's there, you will have successfully deployed your first app(s) to Mesosphere!
-![image](/images/marathon_dashboard.png)
+Now that we’ve defined all the pipelines we can chain them together! Navigate  to the **Workflows **tab, and you should see your `test pipeline` in the pipeline editor, which represents the starting point for our Workflow. Now you can add the remaining pipelines to create Workflow we want. The end result should look like this:
 
-If you want to scale the amount of instances for your web application up or
-down, you can just modify the env var in your wercker configuration and
-redeploy to marathon. Nice 'n easy.
+![image](/images/marathon_workflow_overview.png)
+
+#### Preparing DC/OS for deployment
+
+The tweeter app requires Cassandra and Kafka installed. In the DC/OS interface you can install these packages, as explained in[ this tutorial](https://docs.mesosphere.com/usage/tutorials/containerized-app/).
 
 ### Wrapping up
 
-Following this tutorial you spun up your first app on mesosphere. While that's
-pretty awesome, the app itself is pretty simple. That's why we're going to
-follow up with a part two of this tutorial, where we'll show you how to deploy
-an application with multiple moving parts, so stay tuned!
+That's it! You've now set up continuous deployment to Mesosphere's DC/OS and Marathon.
