@@ -259,7 +259,7 @@ Lastly, create the `build-dev` and `build-prod `pipelines. Instead of creating e
 
 #### Creating the Workflow
 
-Now that we’ve defined all the pipelines we can chain them together! Navigate  to the **Workflows **tab, and you should see your `test pipeline` in the pipeline editor, which represents the starting point for our Workflow. Now you can add the remaining pipelines to create Workflow we want. The end result should look like this:
+Now that we’ve defined all the pipelines we can chain them together! Navigate  to the **Workflows **tab, and you should see your `test pipeline` in the Workflows editor, which represents the starting point for our Workflow. Now you can add the remaining pipelines to create the Workflow we want. The end result should look like this:
 
 ![image](/images/marathon_workflow_overview.png)
 

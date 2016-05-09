@@ -9,6 +9,7 @@
 	],
   [
      "pipelines",
+		 "managing.md",
      "per-pipeline-containers.md",
      "stacks.md",
      "wercker-cache"
