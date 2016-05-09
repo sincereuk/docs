@@ -20,11 +20,11 @@ This allows you to [chain pipelines](/docs/workflows/chaining.html) together.
 
 ### Creating Workflows
 
-Workflows can only be created in the UI (different from
+Workflows can only be created on the website (different from
 [pipelines](/docs/pipelines/index.html), which can only be defined in the
 [wercker.yml](/docs/wercker-yml/index.html)).
 
-To create a new Workflow, you can use the "Manage Workflows" button found in the
+To create a new Workflow, you can use the **Manage Workflows** button found in the
 top right of your application page. Alternatively, you can go to your
 application **settings** page and head to the **Workflows** section.
 
@@ -44,12 +44,12 @@ will be automatically created.
 
 ### Updating Workflows
 
-An overview of all your Workflows is available in your **application settings**
--> **Workflows**. Selecting one Workflow allows you to edit its settings.
+An overview of all your pipelines is available in your **application settings**
+-> **Workflows**. Selecting one pipeline allows you to edit its settings.
 
 #### Updating environment variables
 
-Each Workflow can have its own set of environment variables, including SSH
+Each pipeline can have its own set of environment variables, including SSH
 keys. You can read more about creating environment variables
 [here](/docs/environment-variables/index.html).
 
@@ -59,14 +59,14 @@ Each pipeline can have one of the following permission requirements:
 
 1. Public
 2. View runs
-3. View Runs + Manage Workflows
+3. View Runs + Manage pipelines
 4. Admin
 
 **Public**:  If both your application and pipeline are set to **public** everyone will be able to see the runs executed for that pipeline. If your application is not public, all your collaborators (regardless of their permissions) will be able to see runs executed for that Workflow.
 
 **View runs:** Allow only collaborators with ‘view runs’ permissions to manage this pipelien
 
-**View Runs + Manage workflows**: Allow only collaborators with ‘View runs + Manage workflows’ to manage this pipeline
+**View Runs + Manage pipelines**: Allow only collaborators with ‘View runs + Manage workflows’ to manage this pipeline
 
 **Admin**: Only administrator collaborators can manage this pipeline
 
