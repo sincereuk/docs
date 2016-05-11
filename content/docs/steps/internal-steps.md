@@ -132,6 +132,21 @@ Without the "reload: true" the code will only be run once, which is useful if
 your development server has its own reloading semantics (or is only loading
 static files).
 
+#### Tuning open file limits on OSX
+
+The `internal/watch` step uses [kqueue](https://en.wikipedia.org/wiki/Kqueue)
+on OS X. Kqueue must open each file that it watches, which means projects with
+many files may run into system limits. This usually manifests itself as
+a "too many open files" error. You can adjust these limits by running
+
+```
+sysctl -w kern.maxfiles=20480 (or whatever number you choose)
+sysctl -w kern.maxfilesperproc=18000 (or whatever number you choose)
+```
+
+Thanks to github user [@stvnwrgs](https://github.com/stvnwrgs) for posting
+this fix.
+
 ### <a name="internal-shell" class="anchor"></a>internal/shell
 The `internal/shell` step is pretty simple: it drops you into a shell as soon
 as the step is run.
