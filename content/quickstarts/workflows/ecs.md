@@ -1,6 +1,6 @@
 ## Amazon ECR & ECS
 
-In this tutorial, we’ll discuss how to implement continuously deploy your
+In this tutorial, we’ll discuss how to continuously deploy your
 containerized applications onto Amazon ECS and storing images in ECR. 
 ### Requirements
 
@@ -11,7 +11,7 @@ containerized applications onto Amazon ECS and storing images in ECR.
 ### Application architecture
 
 The demo application is a simple app that allows you to write todos. Since it
-stores the todos in-memory, there is no database involved.
+stores the todos in-memory, there is no database or backend storage neccessary.
 
 ### Configuring Wercker
 
@@ -259,7 +259,7 @@ deploy-to-ecs:
 #### Setting up hosted Wercker
 
 Now that we’ve defined all our pipelines, we can chain them together
-using [Workflows](http://wercker.com/workflows), which can be done thru the
+using [Workflows](http://wercker.com/workflows), which can be done through the
 Wercker web interface. Go ahead and create a new project on Wercker using your
 forked tweeter repository. Then, once your project is created, create a new
 Workflow using the **Manage Workflows **button in the top right. There you can
@@ -290,7 +290,7 @@ create the Workflow we want. The end result should look like this:
 
 #### Preparing ECS for deployment
 
-As a lest step before we can deploy our application to ECS, we need to create a
+As a last step before we can deploy our application to ECS, we need to create a
 cluster, a service and a task defintion file which describes how ECS should run
 our containerized app. In this case, we called our cluster and task definition
 file "**workflows-demo** and the service "**workflows-demo-service**" (as you
