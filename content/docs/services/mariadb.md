@@ -61,4 +61,4 @@ Read more about the MariaDB container on [Docker Hub](https://registry.hub.docke
 
 ### Known issues
 
-Please note that mysql adn mariadb docker images have issues with starting the database in time, see https://github.com/docker-library/docs/tree/master/mysql#no-connections-until-mysql-init-completes. As a counter measure make sure to leave enough time, or implement a waiting mechanism to ensure the database is ready.
+Please note that mysql and mariadb docker images have issues with starting the database in time, see https://github.com/docker-library/docs/tree/master/mysql#no-connections-until-mysql-init-completes. As a counter measure make sure to leave enough time, or implement a waiting mechanism to ensure the database is ready.
