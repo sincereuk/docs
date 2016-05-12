@@ -9,8 +9,7 @@
   z-index: 200;
   width: 100%;
   height: 50px;
-  background-color: var(--color-blue_base);
-  box-shadow: 0 4px 20px 0 var(--color-blue_light);
+  background-color: var(--color-white);
 }
 
 .navbar-floating {
@@ -19,15 +18,13 @@
 
 .navbar-container {
   padding: 0;
-  background-color: var(--color-blue_base);
-}
-
-.navbar-floating .navbar-container {
-  background-color: var(--color-blue_base);
+  height: 50px;
+  background-color: var(--color-white);
+  box-shadow: 0 -2px 6px rgba(76,93,121,0.22)
 }
 
 .navbar {
-  margin-top: 16px;
+  margin-top: 6px;
   padding-left: 10px;
   display: flex;
   flex-wrap: row wrap;
@@ -46,33 +43,20 @@
 
 .navbar-item {
   margin-right: 15px;
-  color: var(--color-grey_light);
+  color: var(--color-blue_light);
   font-size: var(--fontSize_small);
   line-height: 4px;
   text-decoration: none;
-}
-
-.navbar-item:hover {
-  color: var(--color-white);
 }
 
 .navbar-item_right {
   display: none;
 }
 
-.navbar-floating .navbar-item {
-  color: var(--color-grey_light);
-}
-
-.navbar-floating .navbar-item:hover,
-.navbar-floating .navbar-item_active,
-.navbar-floating .navbar-item_active:hover {
-  color: var(--color-white);
-}
-
+.navbar-item:hover,
 .navbar-item_active,
 .navbar-item_active:hover {
-  color: var(--color-white);
+  color: var(--color-skyblue_dark);
 }
 
 /**
@@ -84,7 +68,7 @@
 }
 
 .logo-group path {
-  fill: var(--color-white);
+  fill: var(--color-blue_base);
 }
 
 /**
@@ -95,41 +79,37 @@
   .nav-sticky {
     position: inherit;
     border-top: none;
-    height: 58px;
-    background-color: var(--color-grey_lightest);
-    box-shadow: none;
+    background-color: var(--color-white);
   }
 
   .navbar-container {
     position: fixed;
     width: 100vw;
+    height: 40px;
     padding: 10px 0;
-    background-color: var(--color-blue_base);
-    transition: background-color var(--duration_fast) var(--easing_smooth);
-  }
-
-  .navbar-floating .navbar-container {
-    background-color: var(--color-blue_base);
+    background-color: var(--color-white);
+    box-shadow: 0 2px 6px rgba(76,93,121,0.22)
   }
 
   .navbar {
     display: block;
+    margin-top: 16px;
   }
 
   .navbar-item {
     float: left;
-    color: var(--color-grey_light);
+    color: var(--color-blue_light);
     font-size: var(--fontSize_base);
   }
 
   .navbar-item:hover {
-    color: var(--color-white);
+    color: var(--color-skyblue_dark);
   }
 
   .navbar-item_active,
   .navbar-item_active:hover {
     font-family: 'CorporateS-Regular', sans-serif;
-    color: var(--color-white);
+    color: var(--color-skyblue_dark);
   }
 
   .navbar-item_right {
@@ -150,87 +130,58 @@
 }
 
 /**
- * Navbar button.
+ * Signup nav button.
  */
 
 .button-nav_signup {
   display: none;
-  border-radius: 2px;
-  padding: 10px 14px;
-  text-decoration: none;
-  color: var(--color-grey_lighter);
-  font-size: var(--fontSize_base);
-  background-color: var(--color-green_base);
-  box-shadow: inset 0 0 0 2px var(--color-green_base);
-  transition: all var(--duration_fastest) var(--easing_smooth);
 }
-
-.button-nav_signup:hover {
-  color: var(--color-green_base);
-  background-color: transparent;
-}
-
-/**
- * Responsive rules for screens starting at 768px width
- */
 
 @media screen and (min-width: 768px) {
   .button-nav_signup {
     display: block;
     float: right;
+    border-radius: 2px;
+    padding: 9px 14px;
+    text-decoration: none;
+    color: var(--color-grey_lighter);
+    font-size: var(--fontSize_base);
+    background-color: var(--color-green_base);
+    box-shadow: inset 0 0 0 2px var(--color-green_base);
+  }
+
+  .button-nav_signup:hover {
+    color: var(--color-green_base);
+    background-color: transparent;
   }
 }
 
 /**
- * Devcenter & Learn navbar
+ * Login nav button.
  */
+
+.button-nav_login {
+  display: none;
+}
 
 @media screen and (min-width: 768px) {
+  .button-nav_login {
+    display: block;
+    float: right;
+    margin-right: 10px;
+    border-radius: 2px;
+    padding: 9px 14px;
+    background-color: var(--color-skyblue_base);
+    color: var(--color-grey_lightest);
+    font-size: var(--fontSize_small);
+    font-weight: var(--fontWeight_base);
+    text-decoration: none;
+    box-shadow: inset 0 0 0 2px var(--color-skyblue_base);
+    transition: all var(--duration_fastest) var(--easing_smooth);
+  }
 
-#devcenter .nav-sticky,
-#learn .nav-sticky {
-  min-height: 0px;
-  height: 0px;
-}
-
-#devcenter .navbar-container,
-#learn .navbar-container {
-  background-color: transparent;
-}
-
-#devcenter .navbar-floating .navbar-container,
-#learn .navbar-floating .navbar-container {
-  background-color: var(--color-blue_base);
-}
-
-/**
- * Learn navbar button
- */
-
-#learn .navbar-item {
-  color: var(--color-grey_lightest);
-}
-
-#learn .button-nav_signup {
-  background-color: var(--color-white);
-  color: var(--color-blue_base);
-  box-shadow: inset 0 0 0 2px var(--color-white);
-}
-
-#learn .button-nav_signup:hover {
-  color: var(--color-white);
-  background-color: transparent;
-}
-
-#learn .navbar-floating .button-nav_signup {
-  background-color: var(--color-green_base);
-  color: var(--color-grey_lighter);
-  box-shadow: inset 0 0 0 2px var(--color-green_base);
-}
-
-#learn .navbar-floating .button-nav_signup:hover {
-  color: var(--color-green_base);
-  background-color: transparent;
-}
-
+  .button-nav_login:hover {
+    color: $color-skyblue_base;
+    background-color: transparent;
+  }
 }

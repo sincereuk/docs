@@ -66,6 +66,12 @@ function render () {
             id: 'signup-nav-sub',
             href: 'https://app.wercker.com/users/new/',
             children: 'Sign up'
+          }),
+          dom.a({
+            className: 'button-nav_login',
+            id: 'nav-login',
+            href: 'https://app.wercker.com/',
+            children: 'Log in'
           })
         ),
         dom.ul({className: 'navbar'},
@@ -109,13 +115,6 @@ function render () {
               className: 'navbar-item',
               href: 'http://blog.wercker.com',
               children: 'Blog'
-            })
-          ),
-          dom.li(null,
-            dom.a({
-              className: 'navbar-item navbar-item_right',
-              href: 'https://app.wercker.com',
-              children: 'Log in'
             })
           )
         )

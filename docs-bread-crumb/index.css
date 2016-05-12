@@ -13,9 +13,10 @@
 .bread-crumb {
   display: none;
   position: relative;
-  height: 43px;
+  height: 45px;
   transform: translateY(-200px);
-  background-color: var(--color-grey_light);
+  border-bottom: 1px solid var(--color-grey_light);
+  background-color: var(--color-grey_lighter);
 }
 
 /**
@@ -84,7 +85,7 @@
 
 @media screen and (min-width: 768px) {
   .bread-crumb-floating {
-    top: 58px;
+    top: 60px;
   }
 
   .bread-crumb ul {

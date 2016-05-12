@@ -66,9 +66,13 @@ body.sidebar-open {
   overflow-y: scroll;
 }
 
-.sidebar-list > ul {
+.sidebar-list > ul > li {
   margin-top: 3px;
   border-bottom: 1px solid var(--color-grey_lighter);
+}
+
+.sidebar-list > ul > li:empty {
+  border: none;
 }
 
 .sidebar-list > ul + ul {
