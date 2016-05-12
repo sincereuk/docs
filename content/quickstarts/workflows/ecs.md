@@ -118,7 +118,7 @@ To see the dev pipeline in action, execute the following command in your
 terminal:
 
 ```no-highlight
-wercker dev --publish 80
+wercker dev --publish 8000
 ```
 
 Wercker will now execute the `dev` pipeline. You should see containers coming

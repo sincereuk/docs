@@ -11,12 +11,12 @@
   [
     "deployment",
     "heroku.md",
-    "ECS.md",
     "kubernetes.md"
   ],
   [
     "workflows",
     "mesosphere.md",
+    "ecs.md",
     "clair.md"
   ],
   [
