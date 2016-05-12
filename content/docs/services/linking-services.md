@@ -66,6 +66,7 @@ build:
 ```
 
 ### Using the environment variables
+
 To use these env vars in your application you
 would simply query the environment for the variables you are looking for. In
 this example, you would want the IP and the port Elasticsearch is running on. In
@@ -75,6 +76,20 @@ Go this would look something like this:
 fmt.Println(“IP:", os.Getenv("ELASTICSEARCH_PORT_9300_TCP_ADDR”))
 fmt.Println(“PORT:", os.Getenv("ELASTICSEARCH_PORT_9300_TCP_PORT”))
 ```
+
+### Waiting for services to come up
+
+You can add this `script` step to your **wercker.yml** to ensure that your pipeline run will wait until the service has come up:
+
+```
+- script: 
+name: "Wait for MariaDB connection" 
+code: | 
+while ! nc -q 1 $MARIADB_PORT_3306_TCP_ADDR $MARIADB_PORT_3306_TCP_PORT 
+</dev/null; do sleep 3; done
+```
+
+Thanks to user [ryanrapp](https://github.com/ryanrapp/) for suggesting this!
 
 ### Advanced usage
 You can read more about injecting environment variables and advanced service
