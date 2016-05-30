@@ -6,3 +6,4 @@ Get started with one of these guides:
 
 * [Clair](/quickstarts/workflows/clair.html)
 * [Mesosphere](/quickstarts/workflows/mesosphere.html)
+* [ECS & ECR](/quickstarts/workflows/ecs.html)
