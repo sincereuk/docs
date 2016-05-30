@@ -1,6 +1,6 @@
 ## Mesosphere DC/OS
 
-In this tutorial, we’ll discuss how to implement continuously deploy your containerized applications onto Marathon running on top of DC/OS. We will be using Mesosphere’s own sample app, tweeter, with some slight modifications to deploy.
+In this tutorial, we’ll discuss how to continuously deploy your containerized applications onto Marathon running on top of DC/OS. We will be using Mesosphere’s own sample app, tweeter, with some slight modifications to deploy.
 
 ### Requirements
 
