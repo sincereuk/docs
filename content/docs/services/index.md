@@ -38,4 +38,18 @@ not.
 Note that as opposed to the [main containers](/learn/containers/using-containers.html) section, which is a singular item,
 the services section contains a list of items and as such is preceded by a `-`.
 
+Optionally you can provide each server with a unique name, which allows you to use multiple services with the same image:
+
+```no-highlight
+services:
+  - name: red1
+    id: sutoiku/redis
+    cmd: redis-server
+  - name: red2
+    id: sutoiku/redis
+    cmd: redis-server
+```
+
+This will override the Docker `name` which in turn is the hostname for that container. 
+
 To understand how to connect to these services, please see [linking services](/docs/services/linking-services.html)
