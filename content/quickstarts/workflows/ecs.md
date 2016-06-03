@@ -54,6 +54,9 @@ push-release-ecr:
 deploy-to-ecs:
   box: python:2.7-slim
   steps:
+    - script:
+        name: template
+        code: ./template.sh
     - 1science/aws-ecs:
         key: $AWS_ACCESS_KEY_ID
         secret: $AWS_SECRET_ACCESS_KEY
@@ -198,7 +201,7 @@ release-build:
         code: |
           npm run build
           mv ./build/* $WERCKER_OUTPUT_DIR
-          mv workflows-demo-task-definition.json $WERCKER_OUTPUT_DIR
+          mv template.sh $WERCKER_OUTPUT_DIR
 ```
 
 Then we can push the artifact as an alpine nginx container, which dramatically
@@ -247,6 +250,9 @@ written using `python`.
 deploy-to-ecs:
   box: python:2.7-slim
   steps:
+    - script:
+        name: template
+        code: ./template.sh
     - 1science/aws-ecs:
         key: $AWS_ACCESS_KEY_ID
         secret: $AWS_SECRET_ACCESS_KEY
