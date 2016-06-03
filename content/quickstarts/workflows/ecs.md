@@ -55,7 +55,7 @@ deploy-to-ecs:
   box: python:2.7-slim
   steps:
     - 1science/aws-ecs:
-        key: $AWS_ACCESS_KEY
+        key: $AWS_ACCESS_KEY_ID
         secret: $AWS_SECRET_ACCESS_KEY
         cluster-name: workflows-demo
         service-name: workflows-demo-service
@@ -77,7 +77,7 @@ the pipelines. Alternatively, you can specify a custom file by using the`
 that file, replacing the values with your own:
 
 ```no-highlight
-X_AWS_ACCESS_KEY=<access_key>
+X_AWS_ACCESS_KEY_ID=<access_key>
 X_AWS_SECRET_ACCESS_KEY=<secret_access_key>
 
 # only the unique id is neccessary
@@ -248,7 +248,7 @@ deploy-to-ecs:
   box: python:2.7-slim
   steps:
     - 1science/aws-ecs:
-        key: $AWS_ACCESS_KEY
+        key: $AWS_ACCESS_KEY_ID
         secret: $AWS_SECRET_ACCESS_KEY
         cluster-name: workflows-demo
         service-name: workflows-demo-service
@@ -271,7 +271,7 @@ variables (simply copy/paste the values from your ENVIRONMENT file you created
 earlier):
 
 ```no-highlight
-AWS_ACCESS_KEY=<access_key>
+AWS_ACCESS_KEY_ID=<access_key>
 AWS_SECRET_ACCESS_KEY=<secret_access_key>
 AWS_REGISTRY_ID=<id>
 ```
