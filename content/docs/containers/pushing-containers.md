@@ -114,7 +114,7 @@ when not using the Docker Hub. Here we push to the repo with username
 When pushing to the Google Container Registry (also known as
 [gcr.io](http://gcr.io)) you need authenticate by using a [JSON key file](https://cloud.google.com/container-registry/docs/advanced-authentication#using_a_json_key_file) associated with a [service account](https://support.google.com/cloud/answer/6158849#serviceaccounts). 
 
-Note that the username must be "_json_key", otherwise the authentication will fail. You can store the contents of the JSON file in an environment variable called `$GCR_JSON_KEY_FILE`. 
+Note that the username must be set to `_json_key`, otherwise the authentication will fail. You can store the contents of the JSON file in an environment variable called `$GCR_JSON_KEY_FILE`. 
 
 ```yaml
 deploy:
