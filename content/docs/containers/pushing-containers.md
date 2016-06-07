@@ -112,31 +112,18 @@ when not using the Docker Hub. Here we push to the repo with username
 ### <a name="gcr" class="anchor"></a> Pushing to the Google Container Registry (gcr.io)
 
 When pushing to the Google Container Registry (also known as
-[gcr.io](http://gcr.io)) you need authenticate by using a token. As such
-an extra step is involved in retrieving the token and subsequently using
-it in the `internal/docker-push` step:
+[gcr.io](http://gcr.io)) you need authenticate by using a [JSON key file](https://cloud.google.com/container-registry/docs/advanced-authentication#using_a_json_key_file) associated with a [service account](https://support.google.com/cloud/answer/6158849#serviceaccounts). 
+
+Note that the username must be set to `_json_key`, otherwise the authentication will fail. You can store the contents of the JSON file in an environment variable called `$GCR_JSON_KEY_FILE`. 
 
 ```yaml
 deploy:
-  box: google/cloud-sdk
-  steps:
-    - script:
-        name: install jq
-        code: wget -O /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5rc1/jq-linux-x86_64-static && chmod a+x /usr/local/bin/jq
-    - script:
-        name: gcr.io authentication
-        code: |
-          gcloud auth activate-refresh-token $GCLOUD_ACCOUNT $GCLOUD_REFRESH_TOKEN
-          gcloud docker --authorize-only
-          export GCR_AUTH_TOKEN=$(cat $HOME/.dockercfg | jq --raw-output '.["https://gcr.io"].auth' | base64 --decode | cut -d ':' -f2)
     - internal/docker-push:
-        username: _token
-        password: $GCR_AUTH_TOKEN
-        repository: gcr.io/<MY-PROJECT>/<MY-IMAGE>
+        username: _json_key
+        password: $GCR_JSON_KEY_FILE
+        repository: gcr.io/<MY-PROJECT-ID>/<MY-IMAGE>
         registry: https://gcr.io
 ```
-
-Thanks to wercker user [vially](https://github.com/vially) for providing these steps!
 
 ### <a name="ecr" class="anchor"></a> Pushing to Amazon ECR
 
