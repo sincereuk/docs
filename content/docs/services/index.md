@@ -13,14 +13,14 @@ containers in your [wercker.yml](/docs/wercker-yml/creating-a-yml.html) file thr
 
 ```no-highlight
 services:
-    - mongodb
+    - mongo
 ```
 
 Having multiple services is also possible:
 
 ```no-highlight
 services:
-    - mongodb
+    - mongo
     - redis
 ```
 
@@ -28,7 +28,7 @@ Tags specify a version of your service container:
 
 ```no-highlight
 services:
-    - mongodb:2.2.7
+    - mongo:2.2.7
 ```
 
 Please check the documentation of the container you are using if
