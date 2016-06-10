@@ -55,6 +55,8 @@ field contains the repository that you want to push to (in this case the
 username `turing` with the `bar` image), and `registry` is
 the URL of your Docker registry.
 
+>NOTE: if you want to push to a registry that supports V2 of the API, simply append "/v2" to your registry URL.
+
 If your container needs a `cmd` to be run on start up of the container along
 with a `port` that your application listens on, you can "bake" that into
 the container as well:
