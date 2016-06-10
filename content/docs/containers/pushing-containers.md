@@ -134,7 +134,7 @@ box: busybox
 push-to-ecr:
   steps:
     - internal/docker-push:
-        aws-access-key: $AWS_ACCESS_KEY_ID
+        aws-access-key-id: $AWS_ACCESS_KEY_ID
         aws-secret-key: $AWS_SECRET_ACCESS_KEY
         aws-region: $AWS_REGION
         aws-registry-id: $AWS_REGISTRY_ID
