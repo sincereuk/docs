@@ -45,8 +45,7 @@ available via `npm run-script`:
 
 
 ## Style Guide
-   * Wercker must always be lowercase, unless it's at the beginning of
-       a sentence.
+   * Wercker must always be uppercase.
    * Prefer American English
    * All nouns which are normally two words in English should be written as two
        words. e.g.
