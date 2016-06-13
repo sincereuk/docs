@@ -15,7 +15,7 @@ reference them through an id:
 
 ```yaml
 services:
-    - id: mongodb
+    - id: mongo
 ```
 
 Next you want to the pass along additional environment information, for instance a username and password:

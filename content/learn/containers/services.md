@@ -19,7 +19,7 @@ You can read more about linking containers
 # wercker.yml
 
 services:
-    - mongodb
+    - mongo
     - redis
 
 box:
