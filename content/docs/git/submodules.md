@@ -4,7 +4,7 @@ You will have to fetch submodules manually. Below a snippet of a `wercker.yml` s
 that does exactly that:
 
 ```yaml
-   - script:
+    - script:
         name: install git
         code: |
             apt-get update
