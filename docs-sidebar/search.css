@@ -3,7 +3,6 @@
  */
 
 .section-search {
-  overflow: hidden;
   position: relative;
   margin-bottom: 10px;
 }
@@ -11,7 +10,6 @@
 .section-search form {
   padding: 2px;
   padding-left: 24px;
-  overflow: hidden;
   border: 1px solid var(--color-grey_light);
 }
 
@@ -20,6 +18,7 @@
   color: var(--color-blue_base);
   font-size: var(--fontSize_small);
   font-family: 'Open Sans', sans-serif;
+  vertical-align: middle !important; /* Algolia adds inline style to align this top */
 }
 
 .section-search img {
