@@ -191,26 +191,25 @@ When building containers for production, it’s a good idea to make it as much o
 
 ```
 build-prod:
-   45   box:
-   46     id: alpine:3.2
-   47     cmd: /bin/sh
-   48   steps:
-   49     - script:
-   50         name: install deps
-   51         code: |
-   52           apk update && apk upgrade
-   53           echo installing deps
-   54           apk add curl-dev ruby-dev build-base tzdata
-   55           echo installing ruby stuff
-   56           apk add ruby ruby-io-console ruby-bundler
-   57           apk add nodejs
-   58           rm -rf /var/cache/apk/*
-   59     - script:
-   60         name: bundle install
-   61         code: |
-   62           gem install bundler
-   63           # bundle install --without development test
-   64           bundle install
+  box:
+    id: alpine:3.2
+    cmd: /bin/sh
+  steps:
+    - script:
+      name: install deps
+      code: |
+        apk update && apk upgrade
+        echo installing deps
+        apk add curl-dev ruby-dev build-base tzdata
+        echo installing ruby stuff
+        apk add ruby ruby-io-console ruby-bundler
+        apk add nodejs
+        rm -rf /var/cache/apk/*
+    - script:
+        name: bundle install
+        code: |
+          gem install bundler
+          bundle install
 ```
 
 And finally, we push this minified version of our container to the registry, and tag it with `alpine`.
