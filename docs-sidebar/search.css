@@ -51,3 +51,43 @@
 .clear-search:before {
   content: "\2039 \a0\20";
 }
+
+/**
+ * Algolia DocSearch
+ */
+
+/* Bottom border of each suggestion */
+.algolia-docsearch-suggestion {
+  border-bottom-color: var(--color-grey_lighter) !important;
+}
+/* Main category headers */
+.algolia-docsearch-suggestion--category-header {
+  background-color: var(--color-skyblue_light) !important;
+  color: var(--color-blue_base) !important;
+  padding: 0 10px !important;
+}
+
+.algolia-docsearch-suggestion--category-header
+.algolia-docsearch-suggestion--highlight {
+  background-color: var(--color-white) !important;
+}
+
+/* Highlighted search terms */
+.algolia-docsearch-suggestion--highlight {
+  color: var(--color-skyblue_dark) !important;
+}
+
+/* Currently selected suggestion */
+.aa-cursor .algolia-docsearch-suggestion--content {
+  color: var(--color-skyblue_dark) !important;
+}
+.aa-cursor .algolia-docsearch-suggestion {
+  background: var(--color-grey_lighter) !important;
+}
+
+.ds-dropdown-menu,
+.algolia-docsearch-footer,
+.algolia-docsearch-suggestion__secondary,
+.algolia-docsearch-suggestion--subcategory-column {
+  border-color: var(--color-grey_lighter) !important;
+}
