@@ -36,7 +36,7 @@ body.sidebar-open .docs-articles {
   }
 
   .docs-articles {
-    z-index: 2;
+    z-index: 0;
     flex: 1 1 80%;
     padding: 0 30px;
     position: relative;
