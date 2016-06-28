@@ -51,7 +51,6 @@ function createClass () {
 // render the sidebar
 // obj, obj, fn -> obj
 function renderSidebar (props, state, setState) {
-  var base = getWindowUrl();
   var currentSection = getCurrentSection();
   var currentArticle = '';
   if (currentSection !== 'index') {
@@ -60,7 +59,7 @@ function renderSidebar (props, state, setState) {
 
   var input;
 
-  var base = getWindowUrl();
+  const base = getWindowUrl();
   if (base === 'docs') {
     input = dom.section({className: 'section-search'},
       dom.form(null,
@@ -73,9 +72,7 @@ function renderSidebar (props, state, setState) {
         dom.img({src: '/images/icon-magnifier.svg', alt: 'search'})
         )
       );
-
-  }
-  else {
+  } else {
     input = renderSearch({base: base, data: props.data, setState: setState});
   }
 
