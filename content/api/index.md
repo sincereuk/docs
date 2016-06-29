@@ -65,7 +65,13 @@ JSON object:
 ```
 
 The `error` and `statusCode` contain information related to the HTTP status
-code. The `message` contains a specific message related to the error.
+code. The `message` contains a specific message related to the error. The `message`
+does not contain sensitive information and is formatted so that it can be displayed
+on a user interface.
+
+Certain error messages also include a `code`. The `code` is unique in the context
+of the endpoint and can be used to provide further assistance to the user. An
+example of a code could be `"code": "stripe_card_declined"`.
 
 If an incorrect parameter or incorrect payload was used, we also include a
 `details` properties object:
