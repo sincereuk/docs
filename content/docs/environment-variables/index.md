@@ -36,3 +36,7 @@ not show all environment variables available during the pipeline run.
 ```
 
 [See the complete list of available env vars &rsaquo;](/docs/environment-variables/available-env-vars.html)
+
+### Downloading environment variables
+
+You can export your environment variables to an `ENVIRONMENT` file for local CLI usage. Simply download the file and put it in your project directory. The Wercker CLI will automatically detect the environment file and import it into your pipeline during execution. 
