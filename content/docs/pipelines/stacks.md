@@ -11,15 +11,15 @@ feature sets.
 You can change stacks by going to the infrastructure settings of your application.
 There are currently *two* stacks available on wercker:
 
-* wercker (newest, also known as Ewok)
-* wercker classic (also known as Andorian)
+* Wercker Docker enabled (newest)
+* Wercker classic (depracated) 
 
 If you're already familiar with the _classic_ stack, see our [migration guide](/docs/faq/migration-tips-v2.html)
 to move to the Docker stack.
 
 ### Docker Stack
 
-The new wercker stack (codename: Ewok) uses the [Docker](http://docker.io) container runtime.
+The new wercker stack uses the [Docker](http://docker.io) container runtime.
 Docker offers tools to create your own containers which you can publish on their
 [Docker Hub](http://hub.docker.com). In the new wercker stack we allow you to use
 containers obtained from the Docker Hub, which you can leverage in your pipelines.
@@ -30,7 +30,7 @@ You can read more about how wercker uses the Docker Hub in [this section](/docs/
 
 ### Classic stack
 
-Wercker classic (codename: Andorian) uses LXC as its container runtime. Because developers want
+Wercker classic uses LXC as its container runtime. Because developers want
 different programming languages, build tools, libraries and services on their
 environment, we offer the ability to create your own boxes and publish these
 on the marketplace. However with Docker and other container formats gaining popularity
