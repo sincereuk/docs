@@ -87,3 +87,18 @@ box:
 build:
 	(...)
 ```
+
+### From Google Container Registry (GCR)
+
+When pulling a private image from the Google Container Registry (also known as gcr.io) you need authenticate by using a [JSON key file](https://cloud.google.com/container-registry/docs/advanced-authentication#using_a_json_key_file) associated with a [service account](https://support.google.com/cloud/answer/6158849#serviceaccounts).
+
+Note that the username must be set to `_json_key`, otherwise the authentication will fail. You can store the contents of the JSON file in an environment variable called `$GCR_JSON_KEY_FILE`.
+
+```
+deploy:
+    - internal/docker-push:
+        username: _json_key
+        password: $GCR_JSON_KEY_FILE
+        repository: gcr.io/<MY-PROJECT-ID>/<MY-IMAGE>
+        registry: https://gcr.io
+```
