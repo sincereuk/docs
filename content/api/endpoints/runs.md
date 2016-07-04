@@ -10,7 +10,7 @@
 
 ### <a name="get-all-runs" class="anchor"></a> Get all runs
 
-Get the last 20 runs. 
+Get the last 20 runs for a given `pipeline` or `application`.
 
 
 Returns an array of `run` objects.
@@ -239,7 +239,7 @@ Returns a `run` object.
 It is possible to add environment variables which will be added to the run.
 The order of the array will be maintained which makes it possible to use
 environment variables which were defined earlier. Any environment variables
-defined as part of the application or deploy target will be overwritten, if
+defined as part of the application or workflow will be overwritten, if
 using the same key.
 
 ***
@@ -339,7 +339,7 @@ Status: 200 OK
   "message": "my custom message!",
   "commits": [],
   "progress": 42,
-  "result": "aborted", // result is set to aborted
+  "result": "aborted", 
   "startedAt": "2016-07-04T11:51:25.996Z",
   "status": "finished",
   "user": {
