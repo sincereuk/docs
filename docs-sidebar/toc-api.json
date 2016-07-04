@@ -2,6 +2,7 @@
   [
     "endpoints",
     "applications.md",
+		"runs.md",
     "builds.md",
     "deploys.md"
   ], 
