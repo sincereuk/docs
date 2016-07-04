@@ -95,10 +95,10 @@ When pulling a private image from the Google Container Registry (also known as g
 Note that the username must be set to `_json_key`, otherwise the authentication will fail. You can store the contents of the JSON file in an environment variable called `$GCR_JSON_KEY_FILE`.
 
 ```
-deploy:
-    - internal/docker-push:
+box:
+    id: gcr.io/<MY-PROJECT-ID>/<MY-IMAGE>
         username: _json_key
         password: $GCR_JSON_KEY_FILE
-        repository: gcr.io/<MY-PROJECT-ID>/<MY-IMAGE>
         registry: https://gcr.io
+        tag: <MY-IMAGE-TAG>
 ```
