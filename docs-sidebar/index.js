@@ -5,7 +5,6 @@ const docsToc = require('./toc-docs.json');
 const apiToc = require('./toc-api.json');
 const cliToc = require('./toc-cli.json');
 const quickstartsToc = require('./toc-quickstarts.json');
-const renderSearch = require('./search');
 
 var dom = react.DOM;
 
@@ -60,21 +59,17 @@ function renderSidebar (props, state, setState) {
   var input;
 
   const base = getWindowUrl();
-  if (base === 'docs') {
-    input = dom.section({className: 'section-search'},
-      dom.form(null,
-        dom.input({
-          type: 'text',
-          placeholder: 'search in ' + base,
-          className: 'search-input',
-          id: 'algolia-search'
-        }),
-        dom.img({src: '/images/icon-magnifier.svg', alt: 'search'})
-        )
-      );
-  } else {
-    input = renderSearch({base: base, data: props.data, setState: setState});
-  }
+  input = dom.section({className: 'section-search'},
+     dom.form(null,
+       dom.input({
+         type: 'text',
+         placeholder: 'search in ' + base,
+         className: 'search-input',
+         id: 'algolia-search'
+       }),
+       dom.img({src: '/images/icon-magnifier.svg', alt: 'search'})
+       )
+     );
 
   return dom.section({className: 'section-sidebar'},
     input,
