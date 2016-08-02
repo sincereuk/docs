@@ -4,24 +4,11 @@ tags: example
 
 ## What IP addresses does wercker use that you can whitelist
 
-These IP addresses only apply for classic wercker builds and deploys.
+The IP addresses of our build machines will change over time. We will publish
+the IP addresses of all stacks to the following two files:
 
-* 54.84.120.252
-* 54.84.97.93
-* 54.84.78.203
-* 54.84.0.100
-* 54.86.208.46
-* 54.88.153.254
-* 54.84.63.197
-* 54.164.4.93
-* 54.85.254.37
-* 54.210.27.137
-* 54.165.210.200
-* 52.0.121.246
-* 54.86.61.205
-* 52.4.3.172
+- https://s3.amazonaws.com/status.wercker.com/worker_ips/production/public
+- https://s3.amazonaws.com/status.wercker.com/worker_ips/production/public.json
 
-The docker enabled stack does not have static IPs at the moment. This means
-that IP addresses may change without notice. That said, there is
-[a GitHub issue](https://github.com/wercker/support/issues/47) that does
-contain the IP addresses currently in use and will be kept up-to-date.
+The first link contains a simple newline delimited text file, and the second
+contains a json file with a single array with all IP addresses.
