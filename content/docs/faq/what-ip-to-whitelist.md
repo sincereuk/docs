@@ -4,11 +4,12 @@ tags: example
 
 ## What IP addresses does wercker use that you can whitelist
 
-The IP addresses of our build machines will change over time. We will publish
-the IP addresses of all stacks to the following two files:
+Here are the static IPs of our
+[NAT](https://en.wikipedia.org/wiki/Network_address_translation#One-to-many_NAT)
+gateways
 
-- https://s3.amazonaws.com/status.wercker.com/worker_ips/production/public
-- https://s3.amazonaws.com/status.wercker.com/worker_ips/production/public.json
+These should rarely, if ever, change. 
 
-The first link contains a simple newline delimited text file, and the second
-contains a json file with a single array with all IP addresses.
+* 52.3.182.172
+* 52.207.177.200
+* 52.2.221.19
