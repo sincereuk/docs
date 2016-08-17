@@ -250,7 +250,6 @@ using the same key.
 
 | Name | Type | Description |
 |:-----|:-----|:------------|
-| `applicationId` | String | **Required** The id of the application for which a run should be triggered. |
 | `pipelineId` | String | **Required** The id of the pipeline for which a run should be triggered. |
 | `sourceRunId` | String | **Optional** The id of the run that should be used as input for this run, including artifacts. This is the same as **chaining** a pipeline. |
 | `branch` | String | **Optional** The Git branch that the run should use. If not specified, the default branch will be used. |
